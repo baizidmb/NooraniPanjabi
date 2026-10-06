@@ -61,7 +61,7 @@ function setupBusinessContactInfo() {
 
   // Setup WhatsApp Links
   const waLinks = document.querySelectorAll(".dynamic-whatsapp-link");
-  const waNumber = config.whatsappNumber || "8801700000000";
+  const waNumber = config.whatsappNumber || "8801728769213";
   const defaultWaText = encodeURIComponent(
     "আসসালামু আলাইকুম, আমি নূরানী পাঞ্জাবী টেইলার্স অ্যান্ড ফেব্রিক্স থেকে পাঞ্জাবী / বাল্ক ইউনিফর্ম সম্পর্কে বিস্তারিত জানতে চাই।"
   );
@@ -73,22 +73,22 @@ function setupBusinessContactInfo() {
   // Setup Facebook Links
   const fbLinks = document.querySelectorAll(".dynamic-facebook-link");
   fbLinks.forEach((el) => {
-    el.href = config.facebookUrl || "https://facebook.com";
+    el.href = config.facebookUrl || "https://www.facebook.com/Nooranipanjabi?mibextid=ZbWKwL";
   });
 
   // Setup Phone Links
   const phoneLinks = document.querySelectorAll(".dynamic-phone-link");
   phoneLinks.forEach((el) => {
-    el.href = `tel:${config.phone ? config.phone.replace(/[\s-]/g, "") : "+8801700000000"}`;
+    el.href = `tel:${config.phone ? config.phone.replace(/[\s-]/g, "") : "+8801728769213"}`;
     if (el.dataset.showText === "true") {
-      el.textContent = config.phoneDisplay || config.phone || "01700-000000";
+      el.textContent = config.phoneDisplay || config.phone || "01728-769213";
     }
   });
 
   // Setup Address & Coverage
   const addressEls = document.querySelectorAll(".dynamic-address");
   addressEls.forEach((el) => {
-    el.textContent = config.address || "Katiadi, Bangladesh";
+    el.textContent = config.address || "নূরানী পাঞ্জাবি টেইলার্স এন্ড ফেব্রিক্স, কটিয়াদী ২৩৩০, বাংলাদেশ";
   });
 
   // Setup Google Maps Links
@@ -285,7 +285,7 @@ function initFormSubmission() {
     }
 
     if (!phone || rawDigits.length < 10) {
-      showToast("সঠিক ১১ ডিজিটের ফোন নম্বর দিন (যেমন: 01700000000)।", "error");
+      showToast("সঠিক ১১ ডিজিটের ফোন নম্বর দিন (যেমন: 01728769213)।", "error");
       document.getElementById("customer-phone")?.focus();
       return;
     }
@@ -394,16 +394,16 @@ function initFormSubmission() {
         showSuccessModal(name, phone);
         form.reset();
       } else {
-        console.error("Telegram API Error:", result);
+        console.error("Submission API Error:", result);
         showTelegramFallbackModal(
-          `টেলিগ্রাম বটের ত্রুটি (${result.description || "Unrecognized error"})।`,
+          "অর্ডারটি সরাসরি WhatsApp-এ নিশ্চিত করুন।",
           { name, phone, orderType: friendlyOrderType, quantity, district, notes }
         );
       }
     } catch (err) {
-      console.error("Network or API Error:", err);
+      console.error("Network Error:", err);
       showTelegramFallbackModal(
-        "নেটওয়ার্ক সংযোগ জনিত সমস্যা হয়েছে। দয়া করে হোয়াটসঅ্যাপে মেসেজ পাঠান।",
+        "নেটওয়ার্ক সংযোগ দুর্বল। দয়া করে সরাসরি হোয়াটসঅ্যাপে পাঠান।",
         { name, phone, orderType: friendlyOrderType, quantity, district, notes }
       );
     } finally {
@@ -493,7 +493,9 @@ function showSuccessModal(name, phone) {
  */
 function showConfigModal(leadData) {
   window._lastLead = leadData;
-  const modal = document.getElementById("telegram-setup-modal");
+  const modal =
+    document.getElementById("whatsapp-forward-modal") ||
+    document.getElementById("telegram-setup-modal");
   if (!modal) {
     // If modal element doesn't exist, open WhatsApp directly
     forwardToWhatsApp(leadData);
@@ -512,7 +514,7 @@ function showConfigModal(leadData) {
 
 function showTelegramFallbackModal(reason, leadData) {
   window._lastLead = leadData;
-  showToast(reason, "error");
+  showToast(reason, "info");
   forwardToWhatsApp(leadData);
 }
 
@@ -521,7 +523,7 @@ function showTelegramFallbackModal(reason, leadData) {
  */
 window.forwardToWhatsApp = function (leadData) {
   const config = window.APP_CONFIG || {};
-  const waNumber = config.whatsappNumber || "8801700000000";
+  const waNumber = config.whatsappNumber || "8801728769213";
 
   const message = `👑 *নূরানী পাঞ্জাবী টেইলার্স অ্যান্ড ফেব্রিক্স*
 ━━━━━━━━━━━━━━━━━━━━━
@@ -693,10 +695,10 @@ function initSettingsModal() {
           : "";
     }
     if (waInput) {
-      waInput.value = config.whatsappNumber || "8801700000000";
+      waInput.value = config.whatsappNumber || "8801728769213";
     }
     if (fbInput) {
-      fbInput.value = config.facebookUrl || "https://facebook.com";
+      fbInput.value = config.facebookUrl || "https://www.facebook.com/Nooranipanjabi?mibextid=ZbWKwL";
     }
   }
 

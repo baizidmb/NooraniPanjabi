@@ -201,3 +201,14 @@ body {
 input[type="range"] {
   accent-color: #cfa853;
 }
+
+/* Mobile Responsiveness & Safe Touch Targets */
+@media (max-width: 640px) {
+  .form-input {
+    font-size: 16px !important; /* Prevents unwanted auto-zoom on iOS Safari */
+  }
+}
+
+.safe-bottom-bar {
+  padding-bottom: max(0.625rem, env(safe-area-inset-bottom, 0.625rem));
+}
