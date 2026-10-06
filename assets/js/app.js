@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initFaqAccordion();
   initMobileMenu();
   initSmoothScroll();
+  initClickAnimations();
 });
 
 /**
@@ -620,29 +621,113 @@ function initFaqAccordion() {
 }
 
 /**
- * Mobile Navigation Menu
+ * Mobile Navigation Menu & Bottom Bar Visibility
+ * Handles smooth 3-line hamburger to X morphing, backdrop fade, and hides the sticky bottom bar when open.
  */
 function initMobileMenu() {
   const menuBtn = document.getElementById("mobile-menu-btn");
   const menuCloseBtn = document.getElementById("mobile-menu-close");
   const mobileNav = document.getElementById("mobile-nav-drawer");
+  const mobileBackdrop = document.getElementById("mobile-nav-backdrop");
+  const mobileBottomBar = document.getElementById("mobile-bottom-bar");
   const navLinks = document.querySelectorAll(".mobile-nav-link");
 
   if (!menuBtn || !mobileNav) return;
 
   function openMenu() {
     mobileNav.classList.remove("translate-x-full");
+    menuBtn.classList.add("menu-open");
+
+    // Fade in backdrop
+    if (mobileBackdrop) {
+      mobileBackdrop.classList.remove("opacity-0", "pointer-events-none");
+      mobileBackdrop.classList.add("opacity-100", "pointer-events-auto");
+    }
+
+    // Smoothly slide down the sticky bottom contact bar so it doesn't stay/collide with menu
+    if (mobileBottomBar) {
+      mobileBottomBar.classList.add("translate-y-full", "opacity-0", "pointer-events-none");
+    }
+
     document.body.style.overflow = "hidden";
   }
 
   function closeMenu() {
     mobileNav.classList.add("translate-x-full");
+    menuBtn.classList.remove("menu-open");
+
+    // Fade out backdrop
+    if (mobileBackdrop) {
+      mobileBackdrop.classList.remove("opacity-100", "pointer-events-auto");
+      mobileBackdrop.classList.add("opacity-0", "pointer-events-none");
+    }
+
+    // Smoothly slide sticky bottom bar back into view
+    if (mobileBottomBar) {
+      mobileBottomBar.classList.remove("translate-y-full", "opacity-0", "pointer-events-none");
+    }
+
     document.body.style.overflow = "";
   }
 
-  menuBtn.addEventListener("click", openMenu);
+  // Toggle drawer and 3-line morphing on menu button click
+  menuBtn.addEventListener("click", () => {
+    const isOpen = menuBtn.classList.contains("menu-open");
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
   if (menuCloseBtn) menuCloseBtn.addEventListener("click", closeMenu);
+  if (mobileBackdrop) mobileBackdrop.addEventListener("click", closeMenu);
   navLinks.forEach((link) => link.addEventListener("click", closeMenu));
+
+  // Close when ESC key is pressed
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && menuBtn.classList.contains("menu-open")) {
+      closeMenu();
+    }
+  });
+}
+
+/**
+ * Satisfying Click Ripple & Micro-Interaction Animations
+ * Creates a smooth expanding gold/emerald wave on button clicks and interactive controls.
+ */
+function initClickAnimations() {
+  document.addEventListener("click", (e) => {
+    const interactiveTarget = e.target.closest(
+      ".gold-gradient-btn, .emerald-gradient-btn, .qty-preset-btn, .dynamic-whatsapp-link, .dynamic-phone-link, .category-btn, #mobile-menu-btn, button[type='submit']"
+    );
+    if (!interactiveTarget) return;
+
+    // Create ripple circle
+    const rect = interactiveTarget.getBoundingClientRect();
+    const ripple = document.createElement("span");
+    ripple.className = "click-ripple";
+
+    const diameter = Math.max(rect.width, rect.height);
+    const radius = diameter / 2;
+
+    const x = e.clientX ? e.clientX - rect.left - radius : rect.width / 2 - radius;
+    const y = e.clientY ? e.clientY - rect.top - radius : rect.height / 2 - radius;
+
+    ripple.style.width = ripple.style.height = `${diameter}px`;
+    ripple.style.left = `${x}px`;
+    ripple.style.top = `${y}px`;
+
+    if (!interactiveTarget.classList.contains("ripple-element")) {
+      interactiveTarget.classList.add("ripple-element");
+    }
+
+    interactiveTarget.appendChild(ripple);
+
+    setTimeout(() => {
+      ripple.remove();
+    }, 600);
+  });
 }
 
 /**

@@ -113,16 +113,21 @@
         </a>
       </div>
 
-      <!-- Mobile Hamburger Button -->
-      <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-stone-700 hover:bg-stone-100 focus:outline-none">
-        <i data-lucide="menu" class="w-6 h-6"></i>
+      <!-- Mobile Hamburger Button with Smooth 3-Line Animation -->
+      <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-xl text-stone-700 hover:bg-stone-100 active:scale-90 transition-all duration-200 focus:outline-none flex flex-col justify-center items-center gap-1.5 w-10 h-10 border border-stone-200/80 shadow-sm" aria-label="Toggle navigation menu">
+        <span class="hamburger-line line-top w-5 h-0.5 bg-[#064332] rounded-full"></span>
+        <span class="hamburger-line line-mid w-3.5 h-0.5 bg-[#cfa853] rounded-full self-start ml-1.5"></span>
+        <span class="hamburger-line line-bot w-5 h-0.5 bg-[#064332] rounded-full"></span>
       </button>
 
     </div>
   </header>
 
+  <!-- Mobile Nav Backdrop Overlay -->
+  <div id="mobile-nav-backdrop" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
   <!-- Mobile Drawer Menu -->
-  <div id="mobile-nav-drawer" class="fixed inset-y-0 right-0 z-50 w-72 bg-[#04261f] text-stone-100 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out p-6 flex flex-col justify-between border-l border-[#cfa853]/20">
+  <div id="mobile-nav-drawer" class="fixed inset-y-0 right-0 z-[60] w-72 max-w-[85vw] bg-[#04261f] text-stone-100 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out p-6 flex flex-col justify-between border-l border-[#cfa853]/20">
     <div>
       <div class="flex items-center justify-between pb-6 border-b border-white/10">
         <div class="flex items-center gap-2">
@@ -1404,7 +1409,7 @@
   </a>
 
   <!-- ================= MOBILE STICKY BOTTOM ACTION BAR (100% MOBILE FRIENDLY - NEVER CUT OFF) ================= -->
-  <div class="sm:hidden fixed bottom-0 inset-x-0 z-50 bg-[#04261f]/98 backdrop-blur-md border-t border-[#cfa853]/40 px-3 pt-2.5 safe-bottom-bar flex items-center justify-between gap-2 shadow-2xl">
+  <div id="mobile-bottom-bar" class="sm:hidden fixed bottom-0 inset-x-0 z-40 bg-[#04261f]/98 backdrop-blur-md border-t border-[#cfa853]/40 px-3 pt-2.5 safe-bottom-bar flex items-center justify-between gap-2 shadow-2xl transition-all duration-300 ease-in-out">
     <a href="tel:+8801728769213" class="dynamic-phone-link flex-1 min-h-[46px] rounded-xl bg-white/10 active:bg-white/20 text-white font-bold text-xs flex items-center justify-center gap-1.5 border border-white/15 transition-colors">
       <i data-lucide="phone-call" class="w-4 h-4 text-[#e8ca82]"></i>
       <span class="whitespace-nowrap">কল করুন</span>
