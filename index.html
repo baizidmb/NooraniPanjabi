@@ -813,58 +813,159 @@
               </select>
             </div>
 
-            <!-- Quantity -->
+            <!-- Quantity with Quick-Select Chips -->
             <div>
-              <label for="order-quantity" class="block text-sm font-semibold text-stone-200 mb-2">
-                পরিমাণ / সংখ্যা (Quantity)
-              </label>
+              <div class="flex items-center justify-between mb-2">
+                <label for="order-quantity" class="block text-sm font-semibold text-stone-200">
+                  পরিমাণ / সংখ্যা (Quantity) <span class="text-rose-400">*</span>
+                </label>
+                <span class="text-[11px] text-stone-400">পিস নির্বাচন করুন:</span>
+              </div>
               <input 
                 type="number" 
                 id="order-quantity" 
                 name="order_quantity" 
                 min="1" 
                 value="20" 
-                placeholder="সংখ্যা (পিস)"
+                placeholder="সংখ্যা লিখুন (যেমন: ৫০)"
                 class="form-input text-stone-900"
               >
+              <!-- Quick Select Buttons -->
+              <div class="flex flex-wrap gap-1.5 mt-2">
+                <button type="button" class="qty-preset-btn px-2.5 py-1 rounded-md text-xs font-semibold bg-white/10 text-stone-200 hover:bg-[#cfa853] hover:text-[#04261f] transition-all" data-qty="1">১ পিস</button>
+                <button type="button" class="qty-preset-btn px-2.5 py-1 rounded-md text-xs font-semibold bg-[#cfa853] text-[#04261f] transition-all" data-qty="20">২০ পিস</button>
+                <button type="button" class="qty-preset-btn px-2.5 py-1 rounded-md text-xs font-semibold bg-white/10 text-stone-200 hover:bg-[#cfa853] hover:text-[#04261f] transition-all" data-qty="50">৫০ পিস</button>
+                <button type="button" class="qty-preset-btn px-2.5 py-1 rounded-md text-xs font-semibold bg-white/10 text-stone-200 hover:bg-[#cfa853] hover:text-[#04261f] transition-all" data-qty="100">১০০ পিস</button>
+                <button type="button" class="qty-preset-btn px-2.5 py-1 rounded-md text-xs font-semibold bg-white/10 text-stone-200 hover:bg-[#cfa853] hover:text-[#04261f] transition-all" data-qty="250">২৫০+ পিস</button>
+              </div>
             </div>
 
             <!-- Fabric Preference -->
             <div>
               <label for="order-fabric" class="block text-sm font-semibold text-stone-200 mb-2">
-                পছন্দের ফেব্রিক্স
+                পছন্দের ফেব্রিক্স (Fabric Type)
               </label>
               <select id="order-fabric" name="order_fabric" class="form-input text-stone-900">
-                <option value="১০০% সুতি ভয়েল (সাদা/অফহোয়াইট)">১০০% সুতি ভয়েল (সাদা)</option>
-                <option value="কটন টুইল ইউনিফর্ম ফেব্রিক্স">কটন টুইল ইউনিফর্ম ফেব্রিক্স</option>
-                <option value="ইজিপশিয়ান প্রিমিয়াম কটন">ইজিপশিয়ান প্রিমিয়াম কটন</option>
-                <option value="সফট লিনেন ব্লেন্ড">সফট লিনেন ব্লেন্ড</option>
-                <option value="কাবলি হেভি ড্র্যাপ টুইল">কাবলি হেভি ড্র্যাপ টুইল</option>
-                <option value="আলোচনা সাপেক্ষে নির্ধারণ">আলোচনা সাপেক্ষে নির্ধারণ</option>
+                <option value="১০০% সুতি ভয়েল (সাদা/অফহোয়াইট)">১০০% সুতি ভয়েল (সাদা/অফহোয়াইট)</option>
+                <option value="কটন টুইল ইউনিফর্ম ফেব্রিক্স (Heavy Wash)">কটন টুইল ইউনিফর্ম ফেব্রিক্স (Heavy Wash)</option>
+                <option value="ইজিপশিয়ান প্রিমিয়াম কটন (চকচকে ফিনিশ)">ইজিপশিয়ান প্রিমিয়াম কটন (চকচকে ফিনিশ)</option>
+                <option value="সফট লিনেন ব্লেন্ড (মার্জিত ও আরাম)">সফট লিনেন ব্লেন্ড (মার্জিত ও আরাম)</option>
+                <option value="কাবলি হেভি ড্র্যাপ টুইল ফেব্রিক্স">কাবলি হেভি ড্র্যাপ টুইল ফেব্রিক্স</option>
+                <option value="আলোচনা সাপেক্ষে নির্ধারণ (নমুনা দেখে)">আলোচনা সাপেক্ষে নির্ধারণ (নমুনা দেখে)</option>
               </select>
+              <p class="text-[11px] text-stone-400 mt-1.5">কাপড়ের নমুনা (Sample) দেখেও চূড়ান্ত করতে পারবেন।</p>
             </div>
 
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             
-            <!-- District / Location -->
+            <!-- All 64 Districts Grouped by Division -->
             <div>
-              <label for="order-district" class="block text-sm font-semibold text-stone-200 mb-2">
-                ডেলিভারি জেলা (District)
-              </label>
-              <select id="order-district" name="order_district" class="form-input text-stone-900">
-                <option value="ঢাকা (Dhaka)">ঢাকা (Dhaka)</option>
-                <option value="চট্টগ্রাম (Chittagong)">চট্টগ্রাম (Chittagong)</option>
-                <option value="সিলেট (Sylhet)">সিলেট (Sylhet)</option>
-                <option value="রাজশাহী (Rajshahi)">রাজশাহী (Rajshahi)</option>
-                <option value="খুলনা (Khulna)">খুলনা (Khulna)</option>
-                <option value="বরিশাল (Barisal)">বরিশাল (Barisal)</option>
-                <option value="রংপুর (Rangpur)">রংপুর (Rangpur)</option>
-                <option value="ময়মনসিংহ (Mymensingh)">ময়মনসিংহ (Mymensingh)</option>
-                <option value="কুমিল্লা (Cumilla)">কুমিল্লা (Cumilla)</option>
-                <option value="বগুড়া (Bogra)">বগুড়া (Bogra)</option>
-                <option value="অন্যান্য জেলা (Other District)">অন্যান্য জেলা (Other District)</option>
+              <div class="flex items-center justify-between mb-2">
+                <label for="order-district" class="block text-sm font-semibold text-stone-200">
+                  ডেলিভারি জেলা (All 64 Districts) <span class="text-rose-400">*</span>
+                </label>
+                <span class="text-[11px] text-[#e8ca82]">৬৪ জেলায় কুরিয়ার সুবিধা</span>
+              </div>
+              <select id="order-district" name="order_district" class="form-input text-stone-900 font-medium">
+                
+                <!-- Dhaka Division -->
+                <optgroup label="📍 ঢাকা বিভাগ (Dhaka Division)">
+                  <option value="কিশোরগঞ্জ (Kishoreganj)" selected>কিশোরগঞ্জ (Kishoreganj) - শোরুম ও কারখানা এলাকা</option>
+                  <option value="ঢাকা (Dhaka)">ঢাকা (Dhaka)</option>
+                  <option value="গাজীপুর (Gazipur)">গাজীপুর (Gazipur)</option>
+                  <option value="নারায়ণগঞ্জ (Narayanganj)">নারায়ণগঞ্জ (Narayanganj)</option>
+                  <option value="নরসিংদী (Narsingdi)">নরসিংদী (Narsingdi)</option>
+                  <option value="টাঙ্গাইল (Tangail)">টাঙ্গাইল (Tangail)</option>
+                  <option value="মানিকগঞ্জ (Manikganj)">মানিকগঞ্জ (Manikganj)</option>
+                  <option value="মুন্সিগঞ্জ (Munshiganj)">মুন্সিগঞ্জ (Munshiganj)</option>
+                  <option value="ফরিদপুর (Faridpur)">ফরিদপুর (Faridpur)</option>
+                  <option value="গোপালগঞ্জ (Gopalganj)">গোপালগঞ্জ (Gopalganj)</option>
+                  <option value="মাদারীপুর (Madaripur)">মাদারীপুর (Madaripur)</option>
+                  <option value="রাজবাড়ী (Rajbari)">রাজবাড়ী (Rajbari)</option>
+                  <option value="শরীয়তপুর (Shariatpur)">শরীয়তপুর (Shariatpur)</option>
+                </optgroup>
+
+                <!-- Chattogram Division -->
+                <optgroup label="📍 চট্টগ্রাম বিভাগ (Chattogram Division)">
+                  <option value="চট্টগ্রাম (Chattogram)">চট্টগ্রাম (Chattogram)</option>
+                  <option value="কুমিল্লা (Cumilla)">কুমিল্লা (Cumilla)</option>
+                  <option value="ব্রাহ্মণবাড়িয়া (Brahmanbaria)">ব্রাহ্মণবাড়িয়া (Brahmanbaria)</option>
+                  <option value="চাঁদপুর (Chandpur)">চাঁদপুর (Chandpur)</option>
+                  <option value="নোয়াখালী (Noakhali)">নোয়াখালী (Noakhali)</option>
+                  <option value="ফেনী (Feni)">ফেনী (Feni)</option>
+                  <option value="লক্ষ্মীপুর (Lakshmipur)">লক্ষ্মীপুর (Lakshmipur)</option>
+                  <option value="কক্সবাজার (Cox's Bazar)">কক্সবাজার (Cox's Bazar)</option>
+                  <option value="বান্দরবান (Bandarban)">বান্দরবান (Bandarban)</option>
+                  <option value="রাঙ্গামাটি (Rangamati)">রাঙ্গামাটি (Rangamati)</option>
+                  <option value="খাগড়াছড়ি (Khagrachhari)">খাগড়াছড়ি (Khagrachhari)</option>
+                </optgroup>
+
+                <!-- Rajshahi Division -->
+                <optgroup label="📍 রাজশাহী বিভাগ (Rajshahi Division)">
+                  <option value="রাজশাহী (Rajshahi)">রাজশাহী (Rajshahi)</option>
+                  <option value="বগুড়া (Bogura)">বগুড়া (Bogura)</option>
+                  <option value="পাবনা (Pabna)">পাবনা (Pabna)</option>
+                  <option value="সিরাজগঞ্জ (Sirajganj)">সিরাজগঞ্জ (Sirajganj)</option>
+                  <option value="নওগাঁ (Naogaon)">নওগাঁ (Naogaon)</option>
+                  <option value="নাটোর (Natore)">নাটোর (Natore)</option>
+                  <option value="চাঁপাইনবাবগঞ্জ (Chapai Nawabganj)">চাঁপাইনবাবগঞ্জ (Chapai Nawabganj)</option>
+                  <option value="জয়পুরহাট (Joypurhat)">জয়পুরহাট (Joypurhat)</option>
+                </optgroup>
+
+                <!-- Khulna Division -->
+                <optgroup label="📍 খুলনা বিভাগ (Khulna Division)">
+                  <option value="খুলনা (Khulna)">খুলনা (Khulna)</option>
+                  <option value="যশোর (Jashore)">যশোর (Jashore)</option>
+                  <option value="কুষ্টিয়া (Kushtia)">কুষ্টিয়া (Kushtia)</option>
+                  <option value="ঝিনাইদহ (Jhenaidah)">ঝিনাইদহ (Jhenaidah)</option>
+                  <option value="চুয়াডাঙ্গা (Chuadanga)">চুয়াডাঙ্গা (Chuadanga)</option>
+                  <option value="মেহেরপুর (Meherpur)">মেহেরপুর (Meherpur)</option>
+                  <option value="মাগুরা (Magura)">মাগুরা (Magura)</option>
+                  <option value="নড়াইল (Narail)">নড়াইল (Narail)</option>
+                  <option value="সাতক্ষীরা (Satkhira)">সাতক্ষীরা (Satkhira)</option>
+                  <option value="বাগেরহাট (Bagerhat)">বাগেরহাট (Bagerhat)</option>
+                </optgroup>
+
+                <!-- Sylhet Division -->
+                <optgroup label="📍 সিলেট বিভাগ (Sylhet Division)">
+                  <option value="সিলেট (Sylhet)">সিলেট (Sylhet)</option>
+                  <option value="মৌলভীবাজার (Moulvibazar)">মৌলভীবাজার (Moulvibazar)</option>
+                  <option value="হবিগঞ্জ (Habiganj)">হবিগঞ্জ (Habiganj)</option>
+                  <option value="সুনামগঞ্জ (Sunamganj)">সুনামগঞ্জ (Sunamganj)</option>
+                </optgroup>
+
+                <!-- Barishal Division -->
+                <optgroup label="📍 বরিশাল বিভাগ (Barishal Division)">
+                  <option value="বরিশাল (Barishal)">বরিশাল (Barishal)</option>
+                  <option value="পটুয়াখালী (Patuakhali)">পটুয়াখালী (Patuakhali)</option>
+                  <option value="ভোলা (Bhola)">ভোলা (Bhola)</option>
+                  <option value="পিরোজপুর (Pirojpur)">পিরোজপুর (Pirojpur)</option>
+                  <option value="বরগুনা (Barguna)">বরগুনা (Barguna)</option>
+                  <option value="ঝালকাঠি (Jhalokati)">ঝালকাঠি (Jhalokati)</option>
+                </optgroup>
+
+                <!-- Rangpur Division -->
+                <optgroup label="📍 রংপুর বিভাগ (Rangpur Division)">
+                  <option value="রংপুর (Rangpur)">রংপুর (Rangpur)</option>
+                  <option value="দিনাজপুর (Dinajpur)">দিনাজপুর (Dinajpur)</option>
+                  <option value="কুড়িগ্রাম (Kurigram)">কুড়িগ্রাম (Kurigram)</option>
+                  <option value="গাইবান্ধা (Gaibandha)">গাইবান্ধা (Gaibandha)</option>
+                  <option value="নীলফামারী (Nilphamari)">নীলফামারী (Nilphamari)</option>
+                  <option value="লালমনিরহাট (Lalmonirhat)">লালমনিরহাট (Lalmonirhat)</option>
+                  <option value="পঞ্চগড় (Panchagarh)">পঞ্চগড় (Panchagarh)</option>
+                  <option value="ঠাকুরগাঁও (Thakurgaon)">ঠাকুরগাঁও (Thakurgaon)</option>
+                </optgroup>
+
+                <!-- Mymensingh Division -->
+                <optgroup label="📍 ময়মনসিংহ বিভাগ (Mymensingh Division)">
+                  <option value="ময়মনসিংহ (Mymensingh)">ময়মনসিংহ (Mymensingh)</option>
+                  <option value="জামালপুর (Jamalpur)">জামালপুর (Jamalpur)</option>
+                  <option value="শেরপুর (Sherpur)">শেরপুর (Sherpur)</option>
+                  <option value="নেত্রকোণা (Netrokona)">নেত্রকোণা (Netrokona)</option>
+                </optgroup>
+
               </select>
             </div>
 

@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initialize interactive features
   initBulkCalculator();
+  initQuantityPresets();
   initFormSubmission();
   initModalHandlers();
   initSettingsModal();
@@ -24,6 +25,15 @@ document.addEventListener("DOMContentLoaded", () => {
   initMobileMenu();
   initSmoothScroll();
 });
+
+/**
+ * Normalize Bengali digits (০-৯) to standard English numbers (0-9)
+ */
+function normalizeBengaliDigits(str) {
+  if (!str) return "";
+  const bnDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
+  return String(str).replace(/[০-৯]/g, (d) => bnDigits.indexOf(d));
+}
 
 /**
  * Load any browser-persisted settings
@@ -205,6 +215,41 @@ function initBulkCalculator() {
 }
 
 /**
+ * Quick Quantity Preset Chips Handler
+ */
+function initQuantityPresets() {
+  const qtyInput = document.getElementById("order-quantity");
+  const presetBtns = document.querySelectorAll(".qty-preset-btn");
+  if (!qtyInput || !presetBtns.length) return;
+
+  presetBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const val = btn.dataset.qty;
+      qtyInput.value = val;
+      presetBtns.forEach((b) => {
+        b.classList.remove("bg-[#cfa853]", "text-[#04261f]");
+        b.classList.add("bg-white/10", "text-stone-200");
+      });
+      btn.classList.add("bg-[#cfa853]", "text-[#04261f]");
+      btn.classList.remove("bg-white/10", "text-stone-200");
+    });
+  });
+
+  qtyInput.addEventListener("input", () => {
+    const curVal = qtyInput.value;
+    presetBtns.forEach((b) => {
+      if (b.dataset.qty === curVal) {
+        b.classList.add("bg-[#cfa853]", "text-[#04261f]");
+        b.classList.remove("bg-white/10", "text-stone-200");
+      } else {
+        b.classList.remove("bg-[#cfa853]", "text-[#04261f]");
+        b.classList.add("bg-white/10", "text-stone-200");
+      }
+    });
+  });
+}
+
+/**
  * Handle Order / Inquiry Form Submission to Telegram Bot API
  */
 function initFormSubmission() {
@@ -220,21 +265,28 @@ function initFormSubmission() {
 
     // Gather form data
     const name = document.getElementById("customer-name")?.value.trim() || "";
-    const phone = document.getElementById("customer-phone")?.value.trim() || "";
+    const rawPhoneInput = document.getElementById("customer-phone")?.value.trim() || "";
     const orderType = document.getElementById("order-type")?.value || "custom_panjabi";
-    const quantity = document.getElementById("order-quantity")?.value || "1";
-    const fabricPreference = document.getElementById("order-fabric")?.value || "Unspecified";
-    const district = document.getElementById("order-district")?.value || "Dhaka";
-    const notes = document.getElementById("order-notes")?.value.trim() || "No extra note";
+    const rawQuantity = document.getElementById("order-quantity")?.value || "1";
+    const fabricPreference = document.getElementById("order-fabric")?.value || "আলোচনা সাপেক্ষে";
+    const district = document.getElementById("order-district")?.value || "কিশোরগঞ্জ (Kishoreganj)";
+    const notes = document.getElementById("order-notes")?.value.trim() || "";
+
+    // Normalize Bengali digits to English
+    const phone = normalizeBengaliDigits(rawPhoneInput);
+    const quantity = normalizeBengaliDigits(rawQuantity) || "1";
+    const rawDigits = phone.replace(/[^\d]/g, "");
 
     // Basic Validation
-    if (!name || !phone) {
-      showToast("অনুগ্রহ করে আপনার নাম এবং মোবাইল নম্বর লিখুন।", "error");
+    if (!name) {
+      showToast("অনুগ্রহ করে আপনার নাম লিখুন।", "error");
+      document.getElementById("customer-name")?.focus();
       return;
     }
 
-    if (phone.length < 10) {
+    if (!phone || rawDigits.length < 10) {
       showToast("সঠিক ১১ ডিজিটের ফোন নম্বর দিন (যেমন: 01700000000)।", "error");
+      document.getElementById("customer-phone")?.focus();
       return;
     }
 
@@ -264,6 +316,10 @@ function initFormSubmission() {
     const botToken = config.telegram?.botToken;
     const chatId = config.telegram?.chatId;
 
+    // Clean phone numbers for click-to-call & click-to-whatsapp
+    const cleanPhone = phone.replace(/[\s-]/g, "");
+    const cleanWaPhone = cleanPhone.replace(/^(\+?88)?0?/, "");
+
     // Check if Telegram credentials are still placeholder
     const isPlaceholder =
       !botToken ||
@@ -288,21 +344,31 @@ function initFormSubmission() {
       return;
     }
 
-    // Prepare Telegram Message formatted in clean HTML
+    const displayNotes = notes ? escapeHtml(notes) : "কোনো বিশেষ নির্দেশনা দেওয়া হয়নি";
+
+    // Prepare Ultra-Clean & Easily Readable Telegram Message (HTML formatted)
     const telegramMessage = `
-🌟 <b>নতুন অর্ডার অনুসন্ধান - নূরানী পাঞ্জাবী টেইলার্স</b> 🌟
-━━━━━━━━━━━━━━━━━━
+👑 <b>নূরানী পাঞ্জাবী টেইলার্স অ্যান্ড ফেব্রিক্স</b>
+━━━━━━━━━━━━━━━━━━━━━
+✨ <b>নতুন অর্ডার অনুসন্ধান (New Order)</b> ✨
+
 👤 <b>গ্রাহকের নাম:</b> ${escapeHtml(name)}
 📞 <b>মোবাইল নম্বর:</b> <code>${escapeHtml(phone)}</code>
-📦 <b>অর্ডারের ধরন:</b> ${escapeHtml(friendlyOrderType)}
-🔢 <b>পরিমাণ:</b> ${escapeHtml(quantity)} টি (Pcs)
-🧵 <b>পছন্দের ফেব্রিক্স:</b> ${escapeHtml(fabricPreference)}
-📍 <b>জেলা / ঠিকানা:</b> ${escapeHtml(district)}
-📝 <b>বিশেষ নোট / মাপ:</b> ${escapeHtml(notes)}
-━━━━━━━━━━━━━━━━━━
+📍 <b>ডেলিভারি জেলা:</b> <b>${escapeHtml(district)}</b>
+
+📦 <b>অর্ডারের বিবরণ:</b>
+▫️ <b>ক্যাটাগরি:</b> ${escapeHtml(friendlyOrderType)}
+▫️ <b>পরিমাণ:</b> <b>${escapeHtml(quantity)} টি (Pcs)</b>
+▫️ <b>ফেব্রিক্স:</b> ${escapeHtml(fabricPreference)}
+
+📝 <b>বিশেষ নির্দেশনা বা মাপ:</b>
+<blockquote>${displayNotes}</blockquote>
+━━━━━━━━━━━━━━━━━━━━━
 ⏰ <b>সময়:</b> ${formattedDate}
-📱 <b>সরাসরি কল করতে:</b> tel:${phone.replace(/[\s-]/g, "")}
-💬 <b>WhatsApp করতে:</b> https://wa.me/88${phone.replace(/^0+/, "").replace(/[\s-]/g, "")}
+
+⚡ <b>তাৎক্ষণিক অ্যাকশন:</b>
+👉 <a href="tel:${cleanPhone}">📞 গ্রাহককে সরাসরি কল দিন</a>
+👉 <a href="https://wa.me/88${cleanWaPhone}">💬 গ্রাহককে হোয়াটসঅ্যাপে লিখুন</a>
     `.trim();
 
     try {
@@ -457,15 +523,21 @@ window.forwardToWhatsApp = function (leadData) {
   const config = window.APP_CONFIG || {};
   const waNumber = config.whatsappNumber || "8801700000000";
 
-  const message = `*🌟 নূরানী পাঞ্জাবী টেইলার্স - নতুন অর্ডার অনুসন্ধান 🌟*
-━━━━━━━━━━━━━━━━━━
+  const message = `👑 *নূরানী পাঞ্জাবী টেইলার্স অ্যান্ড ফেব্রিক্স*
+━━━━━━━━━━━━━━━━━━━━━
+✨ *নতুন অর্ডার অনুসন্ধান (Order Inquiry)* ✨
+
 👤 *নাম:* ${leadData.name || ""}
 📞 *মোবাইল:* ${leadData.phone || ""}
-📦 *অর্ডারের ধরন:* ${leadData.orderType || ""}
-🔢 *পরিমাণ:* ${leadData.quantity || "1"} টি
-🧵 *ফেব্রিক্স:* ${leadData.fabricPreference || "সাধারণ"}
-📍 *ঠিকানা/জেলা:* ${leadData.district || "ঢাকা"}
-📝 *নোট/পরিমাপ:* ${leadData.notes || "কোনো বিশেষ নোট নেই"}`;
+📍 *ডেলিভারি জেলা:* ${leadData.district || "কিশোরগঞ্জ"}
+
+📦 *অর্ডার বিবরণ:*
+▫️ *ক্যাটাগরি:* ${leadData.orderType || ""}
+▫️ *পরিমাণ:* ${leadData.quantity || "1"} টি (Pcs)
+▫️ *ফেব্রিক্স:* ${leadData.fabricPreference || "আলোচনা সাপেক্ষে"}
+
+📝 *বিশেষ নির্দেশনা বা মাপ:*
+${leadData.notes || "কোনো বিশেষ নির্দেশনা দেওয়া হয়নি"}`;
 
   const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
   window.open(waUrl, "_blank");
