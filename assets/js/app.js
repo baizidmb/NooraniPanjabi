@@ -1,6 +1,6 @@
 /**
  * Noorani Panjabi Tailors and Fabrics - Main Application Logic
- * Handles Telegram Bot API submissions, WhatsApp integration, Bulk Calculator, and UI dynamics.
+ * Handles Telegram Bot API submissions, WhatsApp integration, Price Estimator, and UI dynamics.
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupBusinessContactInfo();
 
   // Initialize interactive features
-  initBulkCalculator();
+  initPriceEstimator();
   initQuantityPresets();
   initFormSubmission();
   initModalHandlers();
@@ -64,7 +64,7 @@ function setupBusinessContactInfo() {
   const waLinks = document.querySelectorAll(".dynamic-whatsapp-link");
   const waNumber = config.whatsappNumber || "8801728769213";
   const defaultWaText = encodeURIComponent(
-    "আসসালামু আলাইকুম, আমি নূরানী পাঞ্জাবী টেইলার্স অ্যান্ড ফেব্রিক্স থেকে পাঞ্জাবী / বাল্ক ইউনিফর্ম সম্পর্কে বিস্তারিত জানতে চাই।"
+    "আসসালামু আলাইকুম, আমি নূরানী পাঞ্জাবী টেইলার্স অ্যান্ড ফেব্রিক্স থেকে প্রিমিয়াম কাস্টম পাঞ্জাবী ও ফেব্রিক্স কালেকশন সম্পর্কে জানতে চাই।"
   );
 
   waLinks.forEach((el) => {
@@ -100,9 +100,9 @@ function setupBusinessContactInfo() {
 }
 
 /**
- * Interactive Bulk Quotation Calculator for Schools, Madrasas & Wholesale
+ * Interactive Retail Price Estimator for Men's Custom Tailored Panjabis
  */
-function initBulkCalculator() {
+function initPriceEstimator() {
   const quantityInput = document.getElementById("calc-quantity");
   const quantityDisplay = document.getElementById("calc-quantity-val");
   const fabricSelect = document.getElementById("calc-fabric");
@@ -118,51 +118,50 @@ function initBulkCalculator() {
   if (!quantityInput || !unitPriceDisplay) return;
 
   function calculateQuote() {
-    const qty = parseInt(quantityInput.value, 10) || 50;
-    quantityDisplay.textContent = `${qty} টি (Pcs)`;
+    const qty = parseInt(quantityInput.value, 10) || 1;
+    quantityDisplay.textContent = `${qty} টি (${qty > 1 ? "Pcs" : "Pc"})`;
 
-    // Base price per fabric
+    // Base price per fabric (Retail pricing)
     const baseFabricPrices = {
-      madrasa_voile: 650, // Standard White/Offwhite Voile for Madrasa
-      cotton_twill: 850, // School / Everyday durable cotton
-      egyptian_cotton: 1250, // Premium luxury finish
-      linen_blend: 1100, // Modern breathable linen
-      kabli_fabric: 1450 // Heavy fall double ply Kabli fabric
+      premium_cotton: 950, // 100% Royal Cotton Voile & Poplin
+      giza_cotton: 1450, // Luxury Egyptian & Giza Cotton
+      linen_blend: 1650, // Premium Soft Linen Blend
+      kabli_twill: 1850, // Signature Twill Kabli Suit
+      silk_festive: 2150 // Exclusive Festive Silk & Shine
     };
 
-    const fabricKey = fabricSelect ? fabricSelect.value : "madrasa_voile";
-    let basePrice = baseFabricPrices[fabricKey] || 750;
+    const fabricKey = fabricSelect ? fabricSelect.value : "premium_cotton";
+    let basePrice = baseFabricPrices[fabricKey] || 950;
 
     // Add-on options
     if (pyjamaCheckbox && pyjamaCheckbox.checked) {
-      basePrice += 320; // Includes Matching Pajama
+      basePrice += 450; // Matching Custom Tailored Pajama
     }
     if (embroideryCheckbox && embroideryCheckbox.checked) {
-      basePrice += 80; // School/Madrasa Custom Logo Embroidery
+      basePrice += 250; // Designer Collar & Cuff Embroidery
     }
 
-    // Tiered bulk discounts
+    // Individual retail combo discounts
     let discountPercent = 0;
-    let turnaround = "৫-৭ দিন";
+    let badgeText = "একক কাস্টম অর্ডার";
+    let turnaround = "৩-৫ কার্যদিবস";
 
-    if (qty >= 500) {
-      discountPercent = 30; // 30% Wholesale discount
-      turnaround = "১০-১৪ দিন";
-    } else if (qty >= 200) {
-      discountPercent = 25; // 25% discount
-      turnaround = "৮-১০ দিন";
-    } else if (qty >= 100) {
-      discountPercent = 20; // 20% discount
-      turnaround = "৭-৯ দিন";
-    } else if (qty >= 50) {
-      discountPercent = 15; // 15% discount
-      turnaround = "৫-৭ দিন";
-    } else if (qty >= 20) {
-      discountPercent = 10; // 10% discount
-      turnaround = "৪-৬ দিন";
+    if (qty >= 6) {
+      discountPercent = 15;
+      badgeText = "১৫% স্পেশাল প্যাকেজ";
+      turnaround = "৫-৭ কার্যদিবস";
+    } else if (qty >= 4) {
+      discountPercent = 10;
+      badgeText = "১০% ফ্যামিলি সেভার";
+      turnaround = "৫-৭ কার্যদিবস";
+    } else if (qty >= 2) {
+      discountPercent = 5;
+      badgeText = "৫% কম্বো অফার";
+      turnaround = "৩-৫ কার্যদিবস";
     } else {
       discountPercent = 0;
-      turnaround = "৩-৫ দিন";
+      badgeText = "একক কাস্টম অর্ডার";
+      turnaround = "৩-৫ কার্যদিবস";
     }
 
     const discountedUnitPrice = Math.round(basePrice * (1 - discountPercent / 100));
@@ -171,7 +170,7 @@ function initBulkCalculator() {
     unitPriceDisplay.textContent = `৳ ${discountedUnitPrice.toLocaleString("en-IN")}`;
     totalPriceDisplay.textContent = `৳ ${totalPrice.toLocaleString("en-IN")}`;
     if (discountBadge) {
-      discountBadge.textContent = `${discountPercent}% ছাড় (Bulk Discount)`;
+      discountBadge.textContent = badgeText;
     }
     if (turnaroundDisplay) {
       turnaroundDisplay.textContent = turnaround;
@@ -198,10 +197,10 @@ function initBulkCalculator() {
       const orderQtyInput = document.getElementById("order-quantity");
       const notesField = document.getElementById("order-notes");
 
-      if (orderTypeSelect) orderTypeSelect.value = "bulk_madrasa";
+      if (orderTypeSelect) orderTypeSelect.value = "custom_panjabi";
       if (orderQtyInput) orderQtyInput.value = qty;
       if (notesField) {
-        notesField.value = `[ক্যালকুলেটর কোটেশন]: ফেব্রিক্স: ${fabricText}, আনুমানিক বাজেট: ${total}। লোগো ও স্পেসিফিকেশন নিয়ে আলোচনা করতে চাই।`;
+        notesField.value = `[এস্টিমেটর কোটেশন]: ফেব্রিক্স: ${fabricText}, আনুমানিক বাজেট: ${total}। কাস্টম মাপে সেলাই করতে চাই।`;
       }
 
       // Scroll to order form
@@ -210,7 +209,7 @@ function initBulkCalculator() {
         formSection.scrollIntoView({ behavior: "smooth" });
       }
 
-      showToast("ক্যালকুলেটর তথ্য ফর্মটিতে যোগ করা হয়েছে!", "success");
+      showToast("এস্টিমেটর তথ্য ফর্মটিতে যুক্ত করা হয়েছে!", "success");
     });
   }
 }
@@ -297,12 +296,11 @@ function initFormSubmission() {
     if (submitSpinner) submitSpinner.classList.remove("hidden");
 
     const orderTypeLabelMap = {
-      bulk_madrasa: "🏫 মাদ্রাসা ইউনিফর্ম (মাদ্রাসার জন্য বাল্ক অর্ডার)",
-      bulk_school: "🎒 স্কুল / কলেজ ইউনিফর্ম (বাল্ক অর্ডার)",
-      bulk_wholesale: "👔 পাইকারি / হোলসেল ব্যবসা (ব্যবসায়ীদের জন্য)",
-      custom_panjabi: "✨ কাস্টম পাঞ্জাবী টেইলরিং (ব্যক্তিগত)",
-      kabli_set: "🌙 কাবলি ও পায়জামা সেট",
-      fabric_only: "🧵 শুধুমাত্র প্রিমিয়াম ফেব্রিক্স থান ক্রয়"
+      custom_panjabi: "✨ কাস্টম পাঞ্জাবী (ব্যক্তিগত মাপ ও সেলাই)",
+      kabli_set: "🌙 সিগনেচার কাবলি ও পায়জামা সেট",
+      festive_panjabi: "👑 উৎসব ও ঈদ স্পেশাল এক্সক্লুসিভ কালেকশন",
+      linen_panjabi: "🍃 লাক্সারি সফট লিনেন পাঞ্জাবী",
+      fabric_only: "🧵 প্রিমিয়াম থান ফেব্রিক্স ক্রয়"
     };
 
     const friendlyOrderType = orderTypeLabelMap[orderType] || orderType;
