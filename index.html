@@ -443,117 +443,387 @@
     </div>
   </section>
 
-  <!-- ================= INTERACTIVE RETAIL ESTIMATOR ================= -->
+  <!-- ================= STEP-BY-STEP CUSTOM PANJABI ESTIMATOR ================= -->
   <section id="calculator" class="py-20 pattern-bg text-white relative">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="text-center max-w-3xl mx-auto mb-14">
+      <div class="text-center max-w-2xl mx-auto mb-10">
         <span class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#cfa853] bg-white/10 px-4 py-1.5 rounded-full border border-[#cfa853]/30">
           কাস্টম প্রাইস এস্টিমেটর
         </span>
         <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-4 font-serif-luxury">
-          আপনার পছন্দের পাঞ্জাবীর আনুমানিক বাজেট জানুন
+          ৩টি সহজ ধাপে জানুন আপনার পাঞ্জাবীর বাজেট
         </h2>
         <p class="text-stone-300 mt-2 text-sm sm:text-base">
-          কাপড়ের ধরন, সেলাই ও আনুষঙ্গিক অপশন নির্বাচন করে সহজেই নিজের পাঞ্জাবীর খরচ হিসাব করে নিন।
+          আপনার পছন্দের কাপড় ও সেলাই স্টাইল নির্বাচন করুন এবং সাথে সাথে আনুমানিক মূল্য জেনে নিন।
         </p>
       </div>
 
-      <div class="glass-card-dark p-6 sm:p-10 border border-[#cfa853]/30 shadow-2xl">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <!-- Main Step-by-Step Card -->
+      <div class="glass-card-dark p-6 sm:p-10 border border-[#cfa853]/40 shadow-2xl rounded-3xl relative overflow-hidden">
+        
+        <!-- Step Progress Tracker Header -->
+        <div class="mb-8">
+          <div class="flex items-center justify-between max-w-md mx-auto relative">
+            <!-- Progress Connecting Line -->
+            <div class="absolute left-8 right-8 top-5 -translate-y-1/2 h-1 bg-white/10 -z-0">
+              <div id="step-progress-bar" class="h-full bg-gradient-to-r from-[#cfa853] to-[#e8ca82] transition-all duration-500 w-0"></div>
+            </div>
+
+            <!-- Step 1 Indicator -->
+            <div class="relative z-10 flex flex-col items-center">
+              <div id="step-indicator-1" class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm bg-[#cfa853] text-[#04261f] shadow-lg transition-all duration-300 border-2 border-[#cfa853]">
+                1
+              </div>
+              <span class="text-[11px] sm:text-xs font-semibold mt-1.5 text-stone-200">ফেব্রিক্স</span>
+            </div>
+
+            <!-- Step 2 Indicator -->
+            <div class="relative z-10 flex flex-col items-center">
+              <div id="step-indicator-2" class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm bg-white/10 text-stone-400 border-2 border-white/20 transition-all duration-300">
+                2
+              </div>
+              <span class="text-[11px] sm:text-xs font-semibold mt-1.5 text-stone-400">স্টাইল ও কাজ</span>
+            </div>
+
+            <!-- Step 3 Indicator -->
+            <div class="relative z-10 flex flex-col items-center">
+              <div id="step-indicator-3" class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm bg-white/10 text-stone-400 border-2 border-white/20 transition-all duration-300">
+                3
+              </div>
+              <span class="text-[11px] sm:text-xs font-semibold mt-1.5 text-stone-400">এস্টিমেট</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step Container with Smooth Transition -->
+        <div id="estimator-step-container" class="relative">
           
-          <!-- Controls (Left 7 Cols) -->
-          <div class="lg:col-span-7 space-y-6">
-            
-            <!-- Quantity Slider -->
-            <div>
-              <div class="flex items-center justify-between text-sm mb-2">
-                <label for="calc-quantity" class="font-bold text-[#e8ca82]">পাঞ্জাবীর সংখ্যা (Quantity):</label>
-                <span id="calc-quantity-val" class="font-extrabold text-xl text-white bg-white/10 px-3 py-1 rounded-lg border border-[#cfa853]/40">
-                  1 টি (Pc)
-                </span>
-              </div>
-              <input id="calc-quantity" type="range" min="1" max="10" step="1" value="1" class="w-full h-3 bg-stone-700 rounded-lg appearance-none cursor-pointer">
-              <div class="flex justify-between text-[11px] text-stone-400 mt-1 font-medium">
-                <span>১ পিস (একক অর্ডার)</span>
-                <span>২-৩ পিস (কম্বো অফার)</span>
-                <span>৫+ পিস (ফ্যামিলি প্যাকেজ)</span>
-                <span>১০ পিস</span>
-              </div>
+          <!-- ================= STEP 1: CHOOSE FABRIC CATEGORY ================= -->
+          <div id="estimator-step-1" class="estimator-step step-fade-in block space-y-6">
+            <div class="text-center sm:text-left">
+              <h3 class="text-xl sm:text-2xl font-bold text-white flex items-center justify-center sm:justify-start gap-2">
+                <span class="w-7 h-7 rounded-lg bg-[#cfa853]/20 text-[#e8ca82] text-xs flex items-center justify-center font-bold border border-[#cfa853]/30">১</span>
+                <span>পছন্দের ফেব্রিক্স ক্যাটাগরি বেছে নিন</span>
+              </h3>
+              <p class="text-xs sm:text-sm text-stone-300 mt-1">সবচেয়ে আরামদায়ক ও নিখুঁত ফিনিশের জন্য প্রিমিয়াম কাপড় নির্বাচন করুন</p>
             </div>
 
-            <!-- Fabric Choice Dropdown -->
-            <div>
-              <label for="calc-fabric" class="block font-bold text-[#e8ca82] text-sm mb-2">এক্সক্লুসিভ ফেব্রিক্স নির্বাচন করুন:</label>
-              <select id="calc-fabric" class="w-full bg-[#03241b] border border-[#cfa853]/40 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-[#cfa853]">
-                <option value="premium_cotton">১০০% রয়্যাল সুতি ভয়েল ও পপলিন (গরমের আরামদায়ক) - ৳ ৯৫০</option>
-                <option value="giza_cotton">লাক্সারি ইজিপশিয়ান ও গিজা কটন (চকচকে প্রিমিয়াম ফিনিশ) - ৳ ১,৪৫০</option>
-                <option value="linen_blend">প্রিমিয়াম সফট লিনেন ব্লেন্ড (মার্জিত ও ব্রিদেবল) - ৳ ১,৬৫০</option>
-                <option value="kabli_twill">সিগনেচার টুইল কাবলি স্যুট ফেব্রিক্স (হেভি ড্র্যাপ) - ৳ ১,৮৫০</option>
-                <option value="silk_festive">উৎসব কালেকশন এক্সক্লুসিভ সিল্ক ও কাতা শাইন - ৳ ২,১৫০</option>
-              </select>
-            </div>
-
-            <!-- Add-ons Checkboxes -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-              <label class="flex items-center gap-3 p-3.5 rounded-xl bg-white/5 border border-white/10 cursor-pointer hover:border-[#cfa853]/50 transition-colors">
-                <input id="calc-pyjama" type="checkbox" checked class="w-5 h-5 rounded text-[#cfa853] focus:ring-0">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Fabric Option 1: Premium Cotton -->
+              <label class="fabric-option-card estimator-card-selected relative p-4 sm:p-5 rounded-2xl bg-white/5 border-2 border-[#cfa853] cursor-pointer transition-all flex flex-col justify-between group">
+                <input type="radio" name="estimator_fabric" value="premium_cotton" class="sr-only" checked>
                 <div>
-                  <span class="block text-sm font-semibold text-white">ম্যাচিং পাজামা যুক্ত করুন</span>
-                  <span class="text-xs text-stone-400">+৳৪৫০/সেট</span>
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">গরমের আরামদায়ক</span>
+                    <span class="text-xs font-bold text-[#e8ca82]">৳ ৯৫০ থেকে শুরু</span>
+                  </div>
+                  <h4 class="text-base sm:text-lg font-bold text-white group-hover:text-[#e8ca82] transition-colors">১০০% রয়্যাল কটন (সুতি ভয়েল ও পপলিন)</h4>
+                  <p class="text-xs text-stone-300 mt-1.5 leading-relaxed">দৈনন্দিন পরিধান ও জুমআর নামাজের জন্য শতভাগ ব্রিদেবল, ঘাম শোষণকারী আরামদায়ক সুতি কাপড়।</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs text-stone-400">
+                  <span>রেঞ্জ: ৳ ৯৫০ - ৳ ১,২০০</span>
+                  <div class="check-indicator w-5 h-5 rounded-full border-2 border-[#cfa853] bg-[#cfa853] text-[#04261f] flex items-center justify-center">
+                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+                  </div>
                 </div>
               </label>
 
-              <label class="flex items-center gap-3 p-3.5 rounded-xl bg-white/5 border border-white/10 cursor-pointer hover:border-[#cfa853]/50 transition-colors">
-                <input id="calc-embroidery" type="checkbox" class="w-5 h-5 rounded text-[#cfa853] focus:ring-0">
+              <!-- Fabric Option 2: Egyptian & Giza Cotton -->
+              <label class="fabric-option-card relative p-4 sm:p-5 rounded-2xl bg-white/5 border-2 border-white/10 hover:border-[#cfa853]/50 cursor-pointer transition-all flex flex-col justify-between group">
+                <input type="radio" name="estimator_fabric" value="egyptian_cotton" class="sr-only">
                 <div>
-                  <span class="block text-sm font-semibold text-white">কলার ও কাফ এমব্রয়ডারি / ডিজাইন</span>
-                  <span class="text-xs text-stone-400">+৳২৫০/পিস</span>
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">সর্বাধিক জনপ্রিয়</span>
+                    <span class="text-xs font-bold text-[#e8ca82]">৳ ১,৪৫০ থেকে শুরু</span>
+                  </div>
+                  <h4 class="text-base sm:text-lg font-bold text-white group-hover:text-[#e8ca82] transition-colors">লাক্সারি ইজিপশিয়ান ও গিজা কটন</h4>
+                  <p class="text-xs text-stone-300 mt-1.5 leading-relaxed">সূক্ষ্ম সুতার রেশমি মসৃণ ভাব, মার্জিত দীপ্তি এবং দীর্ঘস্থায়ী শুভ্রতা ও রঙিন উজ্জ্বলতা।</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs text-stone-400">
+                  <span>লাক্সারি রেঞ্জ: ৳ ১,৪৫০ - ৳ ১,৭৫০</span>
+                  <div class="check-indicator w-5 h-5 rounded-full border-2 border-white/30 flex items-center justify-center">
+                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3] hidden"></i>
+                  </div>
+                </div>
+              </label>
+
+              <!-- Fabric Option 3: Kabli Twill -->
+              <label class="fabric-option-card relative p-4 sm:p-5 rounded-2xl bg-white/5 border-2 border-white/10 hover:border-[#cfa853]/50 cursor-pointer transition-all flex flex-col justify-between group">
+                <input type="radio" name="estimator_fabric" value="kabli_twill" class="sr-only">
+                <div>
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">স্মার্ট ড্র্যাপ ও ফল</span>
+                    <span class="text-xs font-bold text-[#e8ca82]">৳ ১,৮৫০ থেকে শুরু</span>
+                  </div>
+                  <h4 class="text-base sm:text-lg font-bold text-white group-hover:text-[#e8ca82] transition-colors">সিগনেচার টুইল কাবলি স্যুট</h4>
+                  <p class="text-xs text-stone-300 mt-1.5 leading-relaxed">হেভি ফল ও নিখুঁত ড্র্যাপ ধরে রাখে। কোঁচকাবে না, আধুনিক স্যুট কাটিং ও স্মার্ট ব্যক্তিত্বের জন্য সেরা।</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs text-stone-400">
+                  <span>সিগনেচার রেঞ্জ: ৳ ১,৮৫০ - ৳ ২,২৫০</span>
+                  <div class="check-indicator w-5 h-5 rounded-full border-2 border-white/30 flex items-center justify-center">
+                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3] hidden"></i>
+                  </div>
+                </div>
+              </label>
+
+              <!-- Fabric Option 4: Silk / Festive -->
+              <label class="fabric-option-card relative p-4 sm:p-5 rounded-2xl bg-white/5 border-2 border-white/10 hover:border-[#cfa853]/50 cursor-pointer transition-all flex flex-col justify-between group">
+                <input type="radio" name="estimator_fabric" value="festive_silk" class="sr-only">
+                <div>
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">ঈদ ও উৎসব স্পেশাল</span>
+                    <span class="text-xs font-bold text-[#e8ca82]">৳ ২,১৫০ থেকে শুরু</span>
+                  </div>
+                  <h4 class="text-base sm:text-lg font-bold text-white group-hover:text-[#e8ca82] transition-colors">এক্সক্লুসিভ উৎসব সিল্ক ও কাতা শাইন</h4>
+                  <p class="text-xs text-stone-300 mt-1.5 leading-relaxed">বিয়ে, ঈদ বা বিশেষ পারিবারিক অনুষ্ঠানের জন্য রাজকীয় চমক ও আভিজাত্যপূর্ণ লুক।</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs text-stone-400">
+                  <span>উৎসব রেঞ্জ: ৳ ২,১৫০ - ৳ ২,৬৫০</span>
+                  <div class="check-indicator w-5 h-5 rounded-full border-2 border-white/30 flex items-center justify-center">
+                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3] hidden"></i>
+                  </div>
                 </div>
               </label>
             </div>
 
+            <!-- Step 1 Next Button -->
+            <div class="mt-8 flex justify-end">
+              <button type="button" id="btn-goto-step-2" class="w-full sm:w-auto gold-gradient-btn px-8 py-3.5 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg">
+                <span>পরবর্তী ধাপ: সেলাই ও স্টাইল নির্বাচন</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
           </div>
 
-          <!-- Price Output Box (Right 5 Cols) -->
-          <div class="lg:col-span-5 bg-gradient-to-b from-[#064332] to-[#021f17] border-2 border-[#cfa853]/60 rounded-2xl p-6 sm:p-8 text-center space-y-5">
-            
-            <div class="flex items-center justify-center gap-2">
-              <span id="calc-discount-badge" class="px-3 py-1 rounded-full text-xs font-extrabold bg-[#cfa853] text-[#04261f]">
-                একক কাস্টম অর্ডার
-              </span>
+          <!-- ================= STEP 2: CHOOSE STYLE / EMBROIDERY ================= -->
+          <div id="estimator-step-2" class="estimator-step hidden space-y-6">
+            <div class="text-center sm:text-left">
+              <h3 class="text-xl sm:text-2xl font-bold text-white flex items-center justify-center sm:justify-start gap-2">
+                <span class="w-7 h-7 rounded-lg bg-[#cfa853]/20 text-[#e8ca82] text-xs flex items-center justify-center font-bold border border-[#cfa853]/30">২</span>
+                <span>সেলাই স্টাইল ও এমব্রয়ডারি পছন্দ করুন</span>
+              </h3>
+              <p class="text-xs sm:text-sm text-stone-300 mt-1">আপনার নিজস্ব পছন্দ অনুযায়ী কলার ও বডি ডিজাইনের কাজ নির্বাচন করুন</p>
             </div>
 
-            <div>
-              <span class="text-xs uppercase tracking-wider text-stone-300 font-semibold">প্রতি পিস আনুমানিক মূল্য:</span>
-              <div id="calc-unit-price" class="text-3xl font-extrabold text-[#e8ca82] mt-1">
-                ৳ ১,৪০০
-              </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <!-- Style 1: Plain -->
+              <label class="style-option-card estimator-card-selected relative p-4 sm:p-5 rounded-2xl bg-white/5 border-2 border-[#cfa853] cursor-pointer transition-all flex flex-col justify-between group">
+                <input type="radio" name="estimator_style" value="plain" class="sr-only" checked>
+                <div>
+                  <div class="w-10 h-10 rounded-xl bg-white/10 text-[#e8ca82] flex items-center justify-center mb-3">
+                    <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+                  </div>
+                  <h4 class="text-base font-bold text-white group-hover:text-[#e8ca82] transition-colors">সলিড ক্লাসিক প্লেন (Plain)</h4>
+                  <p class="text-xs text-stone-300 mt-1.5 leading-relaxed">কোনো বাড়তি কাজ ছাড়া মার্জিত ও পরিচ্ছন্ন লুক। নিখুঁত সেলাই ও প্রিমিয়াম স্ন্যাপ বোতাম।</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+                  <span class="text-emerald-400 font-bold">+৳০ (অন্তর্ভুক্ত)</span>
+                  <div class="check-indicator w-5 h-5 rounded-full border-2 border-[#cfa853] bg-[#cfa853] text-[#04261f] flex items-center justify-center">
+                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+                  </div>
+                </div>
+              </label>
+
+              <!-- Style 2: Machine Embroidery -->
+              <label class="style-option-card relative p-4 sm:p-5 rounded-2xl bg-white/5 border-2 border-white/10 hover:border-[#cfa853]/50 cursor-pointer transition-all flex flex-col justify-between group">
+                <input type="radio" name="estimator_style" value="machine_embroidery" class="sr-only">
+                <div>
+                  <div class="w-10 h-10 rounded-xl bg-white/10 text-[#e8ca82] flex items-center justify-center mb-3">
+                    <i data-lucide="cpu" class="w-5 h-5"></i>
+                  </div>
+                  <h4 class="text-base font-bold text-white group-hover:text-[#e8ca82] transition-colors">ডিজিটাল মেশিন এমব্রয়ডারি</h4>
+                  <p class="text-xs text-stone-300 mt-1.5 leading-relaxed">কলার, প্ল্যাকেট ও কাফে কম্পিউটারাইজড সূক্ষ্ম সুতার মার্জিত ও সুবিন্যস্ত এমব্রয়ডারি।</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+                  <span class="text-[#e8ca82] font-bold">+৳২৫০</span>
+                  <div class="check-indicator w-5 h-5 rounded-full border-2 border-white/30 flex items-center justify-center">
+                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3] hidden"></i>
+                  </div>
+                </div>
+              </label>
+
+              <!-- Style 3: Hand Embroidery -->
+              <label class="style-option-card relative p-4 sm:p-5 rounded-2xl bg-white/5 border-2 border-white/10 hover:border-[#cfa853]/50 cursor-pointer transition-all flex flex-col justify-between group">
+                <input type="radio" name="estimator_style" value="hand_embroidery" class="sr-only">
+                <div>
+                  <div class="w-10 h-10 rounded-xl bg-white/10 text-[#e8ca82] flex items-center justify-center mb-3">
+                    <i data-lucide="sparkles" class="w-5 h-5"></i>
+                  </div>
+                  <h4 class="text-base font-bold text-white group-hover:text-[#e8ca82] transition-colors">এক্সক্লুসিভ হ্যান্ড এমব্রয়ডারি</h4>
+                  <p class="text-xs text-stone-300 mt-1.5 leading-relaxed">অভিজ্ঞ কারিগরদের নিখুঁত হাতের কাজ / কারচুপি ও সূক্ষ্ম সুতার আভিজাত্যপূর্ণ ডিজাইন।</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+                  <span class="text-[#e8ca82] font-bold">+৳৪৫০</span>
+                  <div class="check-indicator w-5 h-5 rounded-full border-2 border-white/30 flex items-center justify-center">
+                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3] hidden"></i>
+                  </div>
+                </div>
+              </label>
             </div>
 
-            <div class="pt-4 border-t border-white/10">
-              <span class="text-xs uppercase tracking-wider text-stone-300 font-semibold">সর্বমোট আনুমানিক বাজেট:</span>
-              <div id="calc-total-price" class="text-4xl sm:text-5xl font-extrabold text-white mt-1 gold-gradient-text">
-                ৳ ১,৪০০
-              </div>
-              <div class="text-xs text-stone-400 mt-2 flex items-center justify-center gap-1.5">
-                <i data-lucide="clock" class="w-3.5 h-3.5 text-[#cfa853]"></i>
-                <span>আনুমানিক ডেলিভারি সময়: <strong id="calc-turnaround" class="text-white">৩-৫ কার্যদিবস</strong></span>
-              </div>
+            <!-- Optional Addon: Matching Pyjama -->
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between">
+              <label class="flex items-center gap-3 cursor-pointer select-none">
+                <input type="checkbox" id="estimator-pyjama" checked class="w-5 h-5 rounded text-[#cfa853] focus:ring-0">
+                <div>
+                  <span class="text-sm font-semibold text-white">ম্যাচিং কাস্টম পাজামা যুক্ত করুন</span>
+                  <span class="text-xs text-stone-400 block">একই কাপড়ে বা মানানসই সাদা কটন পাজামা</span>
+                </div>
+              </label>
+              <span class="text-xs font-bold text-[#e8ca82]">+৳৪৫০</span>
             </div>
 
-            <button id="calc-apply-btn" type="button" class="w-full gold-gradient-btn py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg">
-              <i data-lucide="file-check" class="w-4 h-4"></i>
-              <span>এই বাজেটে অর্ডার ফর্ম পূরণ করুন</span>
-            </button>
+            <!-- Step 2 Navigation Buttons -->
+            <div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-3">
+              <button type="button" id="btn-backto-step-1" class="w-full sm:w-auto px-5 py-3 rounded-xl border border-white/20 text-stone-300 hover:text-white hover:bg-white/10 font-bold text-sm flex items-center justify-center gap-2 transition-all">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                <span>পূর্ববর্তী ধাপ (ফেব্রিক্স)</span>
+              </button>
+              <button type="button" id="btn-goto-step-3" class="w-full sm:w-auto gold-gradient-btn px-8 py-3.5 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg">
+                <span>পরবর্তী ধাপ: এস্টিমেট আনলক করুন</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
 
-            <p class="text-[11px] text-stone-400">
-              * আপনার নিখুঁত মাপ ও পছন্দের ডিজাইনের ওপর ভিত্তি করে রেট সামান্য কম-বেশি হতে পারে।
-            </p>
+          <!-- ================= STEP 3: LEAD CAPTURE FORM ================= -->
+          <div id="estimator-step-3" class="estimator-step hidden space-y-6">
+            <div class="text-center max-w-lg mx-auto">
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#cfa853] to-[#e8ca82] text-[#04261f] flex items-center justify-center mx-auto mb-3 shadow-lg">
+                <i data-lucide="lock" class="w-6 h-6"></i>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-bold text-white">
+                আপনার কাস্টম এস্টিমেট প্রস্তুত!
+              </h3>
+              <p class="text-xs sm:text-sm text-stone-300 mt-1">
+                আপনার নাম ও সক্রিয় হোয়াটসঅ্যাপ নম্বরটি দিন। সাথে সাথেই স্ক্রিনে আপনার পাঞ্জাবীর আনুমানিক মূল্য ও প্যাকেজ আনলক হয়ে যাবে।
+              </p>
+            </div>
 
+            <form id="estimator-lead-form" class="max-w-md mx-auto space-y-4">
+              <div>
+                <label for="estimator-cust-name" class="block text-xs sm:text-sm font-semibold text-stone-200 mb-1.5">
+                  আপনার পূর্ণ নাম <span class="text-rose-400">*</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="estimator-cust-name" 
+                  required 
+                  placeholder="যেমন: তানভীর আহমেদ" 
+                  class="form-input text-stone-900"
+                >
+              </div>
+
+              <div>
+                <label for="estimator-cust-phone" class="block text-xs sm:text-sm font-semibold text-stone-200 mb-1.5">
+                  হোয়াটসঅ্যাপ / মোবাইল নম্বর <span class="text-rose-400">*</span>
+                </label>
+                <div class="relative">
+                  <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-500 text-sm font-bold">
+                    +88
+                  </span>
+                  <input 
+                    type="tel" 
+                    id="estimator-cust-phone" 
+                    required 
+                    placeholder="017XXXXXXXX" 
+                    class="form-input text-stone-900 pl-14"
+                  >
+                </div>
+                <span class="text-[11px] text-stone-400 mt-1 block">আমরা কোনো স্প্যাম করি না। শুধুমাত্র আপনার মাপ ও এস্টিমেট পাঠানোর জন্য ব্যবহৃত হবে।</span>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="pt-3 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <button type="button" id="btn-backto-step-2" class="w-full sm:w-auto px-5 py-3 rounded-xl border border-white/20 text-stone-300 hover:text-white hover:bg-white/10 font-bold text-sm flex items-center justify-center gap-2 transition-all order-2 sm:order-1">
+                  <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                  <span>স্টাইল পরিবর্তন</span>
+                </button>
+                <button type="submit" id="btn-unlock-estimate" class="w-full sm:flex-1 gold-gradient-btn py-3.5 px-6 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-xl order-1 sm:order-2">
+                  <i data-lucide="unlock" class="w-4 h-4"></i>
+                  <span>এস্টিমেট আনলক করুন ✨</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- ================= STEP 4: REVEALED CUSTOM ESTIMATE ================= -->
+          <div id="estimator-step-result" class="estimator-step hidden space-y-6">
+            <div class="text-center max-w-xl mx-auto space-y-6">
+              
+              <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold border border-emerald-500/30">
+                <i data-lucide="check-circle" class="w-4 h-4 text-[#e8ca82]"></i>
+                <span>এস্টিমেট সফলভাবে আনলক হয়েছে!</span>
+              </div>
+
+              <div>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-white">
+                  ধন্যবাদ, <span id="res-cust-name" class="text-[#e8ca82]">গ্রাহক</span>!
+                </h3>
+                <p class="text-xs sm:text-sm text-stone-300 mt-1">
+                  আপনার নির্বাচিত কাপড় ও স্টাইল অনুযায়ী আনুমানিক বাজেট নিচে প্রস্তুত:
+                </p>
+              </div>
+
+              <!-- Price Box -->
+              <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#064332] to-[#021f17] border-2 border-[#cfa853] shadow-2xl relative overflow-hidden">
+                <div class="text-xs font-bold uppercase tracking-wider text-[#e8ca82]">সর্বমোট আনুমানিক বাজেট</div>
+                <div id="res-total-price" class="text-4xl sm:text-5xl font-extrabold text-white mt-1 gold-gradient-text">
+                  ৳ ১,৪৫০
+                </div>
+                <div class="text-xs text-stone-300 mt-2 flex items-center justify-center gap-2">
+                  <i data-lucide="clock" class="w-4 h-4 text-[#cfa853]"></i>
+                  <span>আনুমানিক সেলাই ও ডেলিভারি সময়: <strong class="text-white">৩-৫ কার্যদিবস</strong></span>
+                </div>
+
+                <!-- Summary Breakdown Pills -->
+                <div class="mt-6 pt-5 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-left text-xs">
+                  <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                    <span class="text-stone-400 block text-[11px]">নির্বাচিত ফেব্রিক্স:</span>
+                    <strong id="res-fabric-name" class="text-white text-sm">১০০% রয়্যাল কটন</strong>
+                  </div>
+                  <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                    <span class="text-stone-400 block text-[11px]">সেলাই স্টাইল:</span>
+                    <strong id="res-style-name" class="text-white text-sm">সলিড ক্লাসিক প্লেন</strong>
+                  </div>
+                  <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                    <span class="text-stone-400 block text-[11px]">ম্যাচিং পাজামা:</span>
+                    <strong id="res-pyjama-status" class="text-white text-sm">হ্যাঁ, অন্তর্ভুক্ত</strong>
+                  </div>
+                </div>
+
+                <!-- Guarantees -->
+                <div class="mt-5 flex flex-wrap items-center justify-center gap-4 text-xs text-stone-300">
+                  <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> ১০০% নিখুঁত ফিটিং</span>
+                  <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> ফ্রি অল্টারেশন সাপোর্ট</span>
+                  <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> ৬৪ জেলায় ক্যাশ অন ডেলিভারি</span>
+                </div>
+              </div>
+
+              <!-- Next Action Buttons -->
+              <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                <a id="res-whatsapp-btn" href="#" target="_blank" class="w-full sm:w-auto emerald-gradient-btn px-7 py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg">
+                  <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.888 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                  <span>WhatsApp এ সরাসরি কনফার্ম করুন</span>
+                </a>
+                <a id="res-order-form-btn" href="#order-section" class="w-full sm:w-auto px-6 py-3.5 rounded-xl border-2 border-[#cfa853] text-[#e8ca82] hover:bg-[#cfa853] hover:text-[#04261f] font-bold text-sm flex items-center justify-center gap-2 transition-all">
+                  <i data-lucide="file-text" class="w-4 h-4"></i>
+                  <span>অনলাইন মাপে অর্ডার ফর্ম পূরণ</span>
+                </a>
+              </div>
+
+              <div>
+                <button type="button" id="btn-recalculate" class="text-xs text-stone-400 hover:text-[#e8ca82] underline transition-colors cursor-pointer">
+                  🔄 পছন্দ পরিবর্তন বা আবার হিসাব করুন
+                </button>
+              </div>
+
+            </div>
           </div>
 
         </div>
+
       </div>
 
     </div>

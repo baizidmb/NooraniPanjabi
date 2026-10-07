@@ -100,117 +100,405 @@ function setupBusinessContactInfo() {
 }
 
 /**
- * Interactive Retail Price Estimator for Men's Custom Tailored Panjabis
+ * Interactive Step-by-Step Retail Price Estimator for Men's Custom Tailored Panjabis
+ * Step 1: Fabric Category
+ * Step 2: Style & Embroidery (+ Optional Pyjama)
+ * Step 3: Lead Capture (Name & WhatsApp) before instant reveal
  */
 function initPriceEstimator() {
-  const quantityInput = document.getElementById("calc-quantity");
-  const quantityDisplay = document.getElementById("calc-quantity-val");
-  const fabricSelect = document.getElementById("calc-fabric");
-  const pyjamaCheckbox = document.getElementById("calc-pyjama");
-  const embroideryCheckbox = document.getElementById("calc-embroidery");
+  const stepContainer = document.getElementById("estimator-step-container");
+  if (!stepContainer) return;
 
-  const unitPriceDisplay = document.getElementById("calc-unit-price");
-  const totalPriceDisplay = document.getElementById("calc-total-price");
-  const discountBadge = document.getElementById("calc-discount-badge");
-  const turnaroundDisplay = document.getElementById("calc-turnaround");
-  const quoteApplyBtn = document.getElementById("calc-apply-btn");
+  const step1 = document.getElementById("estimator-step-1");
+  const step2 = document.getElementById("estimator-step-2");
+  const step3 = document.getElementById("estimator-step-3");
+  const stepResult = document.getElementById("estimator-step-result");
 
-  if (!quantityInput || !unitPriceDisplay) return;
+  const progressBar = document.getElementById("step-progress-bar");
+  const ind1 = document.getElementById("step-indicator-1");
+  const ind2 = document.getElementById("step-indicator-2");
+  const ind3 = document.getElementById("step-indicator-3");
 
-  function calculateQuote() {
-    const qty = parseInt(quantityInput.value, 10) || 1;
-    quantityDisplay.textContent = `${qty} টি (${qty > 1 ? "Pcs" : "Pc"})`;
+  const btnGotoStep2 = document.getElementById("btn-goto-step-2");
+  const btnBacktoStep1 = document.getElementById("btn-backto-step-1");
+  const btnGotoStep3 = document.getElementById("btn-goto-step-3");
+  const btnBacktoStep2 = document.getElementById("btn-backto-step-2");
+  const leadForm = document.getElementById("estimator-lead-form");
+  const btnRecalculate = document.getElementById("btn-recalculate");
 
-    // Base price per fabric (Retail pricing)
-    const baseFabricPrices = {
-      premium_cotton: 950, // 100% Royal Cotton Voile & Poplin
-      giza_cotton: 1450, // Luxury Egyptian & Giza Cotton
-      linen_blend: 1650, // Premium Soft Linen Blend
-      kabli_twill: 1850, // Signature Twill Kabli Suit
-      silk_festive: 2150 // Exclusive Festive Silk & Shine
-    };
+  const fabricCards = document.querySelectorAll(".fabric-option-card");
+  const styleCards = document.querySelectorAll(".style-option-card");
+  const pyjamaCheck = document.getElementById("estimator-pyjama");
 
-    const fabricKey = fabricSelect ? fabricSelect.value : "premium_cotton";
-    let basePrice = baseFabricPrices[fabricKey] || 950;
-
-    // Add-on options
-    if (pyjamaCheckbox && pyjamaCheckbox.checked) {
-      basePrice += 450; // Matching Custom Tailored Pajama
+  // Price & Label Data Map
+  const fabricData = {
+    premium_cotton: {
+      name: "১০০% রয়্যাল কটন (সুতি ভয়েল ও পপলিন)",
+      shortName: "রয়্যাল পিওর কটন",
+      basePrice: 950,
+      range: "৳ ৯৫০ - ৳ ১,২০০"
+    },
+    egyptian_cotton: {
+      name: "লাক্সারি ইজিপশিয়ান ও গিজা কটন",
+      shortName: "ইজিপশিয়ান ও গিজা কটন",
+      basePrice: 1450,
+      range: "৳ ১,৪৫০ - ৳ ১,৭৫০"
+    },
+    kabli_twill: {
+      name: "সিগনেচার টুইল কাবলি স্যুট",
+      shortName: "টুইল কাবলি স্যুট",
+      basePrice: 1850,
+      range: "৳ ১,৮৫০ - ৳ ২,২৫০"
+    },
+    festive_silk: {
+      name: "এক্সক্লুসিভ উৎসব সিল্ক ও কাতা শাইন",
+      shortName: "উৎসব সিল্ক ও শাইন",
+      basePrice: 2150,
+      range: "৳ ২,১৫০ - ৳ ২,৬৫০"
     }
-    if (embroideryCheckbox && embroideryCheckbox.checked) {
-      basePrice += 250; // Designer Collar & Cuff Embroidery
+  };
+
+  const styleData = {
+    plain: {
+      name: "সলিড ক্লাসিক প্লেন (Plain)",
+      price: 0
+    },
+    machine_embroidery: {
+      name: "ডিজিটাল মেশিন এমব্রয়ডারি",
+      price: 250
+    },
+    hand_embroidery: {
+      name: "এক্সক্লুসিভ হ্যান্ড এমব্রয়ডারি / কারচুপি",
+      price: 450
+    }
+  };
+
+  const pyjamaPrice = 450;
+
+  let currentFabricKey = "premium_cotton";
+  let currentStyleKey = "plain";
+
+  // Step 1: Fabric Selection Interactivity
+  fabricCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const radio = card.querySelector('input[type="radio"]');
+      if (radio) {
+        radio.checked = true;
+        currentFabricKey = radio.value;
+      }
+
+      fabricCards.forEach((c) => {
+        c.classList.remove("estimator-card-selected", "border-[#cfa853]");
+        c.classList.add("border-white/10");
+        const ind = c.querySelector(".check-indicator");
+        if (ind) {
+          ind.className = "check-indicator w-5 h-5 rounded-full border-2 border-white/30 flex items-center justify-center";
+          const icon = ind.querySelector("i, svg");
+          if (icon) icon.classList.add("hidden");
+        }
+      });
+
+      card.classList.add("estimator-card-selected", "border-[#cfa853]");
+      card.classList.remove("border-white/10");
+      const activeInd = card.querySelector(".check-indicator");
+      if (activeInd) {
+        activeInd.className = "check-indicator w-5 h-5 rounded-full border-2 border-[#cfa853] bg-[#cfa853] text-[#04261f] flex items-center justify-center";
+        const icon = activeInd.querySelector("i, svg");
+        if (icon) icon.classList.remove("hidden");
+      }
+    });
+  });
+
+  // Step 2: Style Selection Interactivity
+  styleCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const radio = card.querySelector('input[type="radio"]');
+      if (radio) {
+        radio.checked = true;
+        currentStyleKey = radio.value;
+      }
+
+      styleCards.forEach((c) => {
+        c.classList.remove("estimator-card-selected", "border-[#cfa853]");
+        c.classList.add("border-white/10");
+        const ind = c.querySelector(".check-indicator");
+        if (ind) {
+          ind.className = "check-indicator w-5 h-5 rounded-full border-2 border-white/30 flex items-center justify-center";
+          const icon = ind.querySelector("i, svg");
+          if (icon) icon.classList.add("hidden");
+        }
+      });
+
+      card.classList.add("estimator-card-selected", "border-[#cfa853]");
+      card.classList.remove("border-white/10");
+      const activeInd = card.querySelector(".check-indicator");
+      if (activeInd) {
+        activeInd.className = "check-indicator w-5 h-5 rounded-full border-2 border-[#cfa853] bg-[#cfa853] text-[#04261f] flex items-center justify-center";
+        const icon = activeInd.querySelector("i, svg");
+        if (icon) icon.classList.remove("hidden");
+      }
+    });
+  });
+
+  // Transition Helper
+  function showStep(stepNum) {
+    const allSteps = [step1, step2, step3, stepResult];
+    allSteps.forEach((s) => {
+      if (s) {
+        s.classList.add("hidden");
+        s.classList.remove("step-fade-in", "block");
+      }
+    });
+
+    let targetStepEl = step1;
+    if (stepNum === 2) targetStepEl = step2;
+    if (stepNum === 3) targetStepEl = step3;
+    if (stepNum === 4) targetStepEl = stepResult;
+
+    if (targetStepEl) {
+      targetStepEl.classList.remove("hidden");
+      targetStepEl.classList.add("step-fade-in", "block");
     }
 
-    // Individual retail combo discounts
-    let discountPercent = 0;
-    let badgeText = "একক কাস্টম অর্ডার";
-    let turnaround = "৩-৫ কার্যদিবস";
+    // Update Step Indicators
+    if (progressBar && ind1 && ind2 && ind3) {
+      if (stepNum === 1) {
+        progressBar.style.width = "0%";
+        setIndicatorState(ind1, "active", "1");
+        setIndicatorState(ind2, "inactive", "2");
+        setIndicatorState(ind3, "inactive", "3");
+      } else if (stepNum === 2) {
+        progressBar.style.width = "50%";
+        setIndicatorState(ind1, "completed", "✓");
+        setIndicatorState(ind2, "active", "2");
+        setIndicatorState(ind3, "inactive", "3");
+      } else if (stepNum === 3) {
+        progressBar.style.width = "100%";
+        setIndicatorState(ind1, "completed", "✓");
+        setIndicatorState(ind2, "completed", "✓");
+        setIndicatorState(ind3, "active", "3");
+      } else if (stepNum === 4) {
+        progressBar.style.width = "100%";
+        setIndicatorState(ind1, "completed", "✓");
+        setIndicatorState(ind2, "completed", "✓");
+        setIndicatorState(ind3, "completed", "✓");
+      }
+    }
 
-    if (qty >= 6) {
-      discountPercent = 15;
-      badgeText = "১৫% স্পেশাল প্যাকেজ";
-      turnaround = "৫-৭ কার্যদিবস";
-    } else if (qty >= 4) {
-      discountPercent = 10;
-      badgeText = "১০% ফ্যামিলি সেভার";
-      turnaround = "৫-৭ কার্যদিবস";
-    } else if (qty >= 2) {
-      discountPercent = 5;
-      badgeText = "৫% কম্বো অফার";
-      turnaround = "৩-৫ কার্যদিবস";
+    if (window.lucide) window.lucide.createIcons();
+  }
+
+  function setIndicatorState(el, state, text) {
+    if (!el) return;
+    el.textContent = text;
+    if (state === "active") {
+      el.className = "w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm bg-[#cfa853] text-[#04261f] shadow-lg transition-all duration-300 border-2 border-[#cfa853]";
+    } else if (state === "completed") {
+      el.className = "w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm bg-emerald-600 text-white shadow-md transition-all duration-300 border-2 border-emerald-500";
     } else {
-      discountPercent = 0;
-      badgeText = "একক কাস্টম অর্ডার";
-      turnaround = "৩-৫ কার্যদিবস";
-    }
-
-    const discountedUnitPrice = Math.round(basePrice * (1 - discountPercent / 100));
-    const totalPrice = discountedUnitPrice * qty;
-
-    unitPriceDisplay.textContent = `৳ ${discountedUnitPrice.toLocaleString("en-IN")}`;
-    totalPriceDisplay.textContent = `৳ ${totalPrice.toLocaleString("en-IN")}`;
-    if (discountBadge) {
-      discountBadge.textContent = badgeText;
-    }
-    if (turnaroundDisplay) {
-      turnaroundDisplay.textContent = turnaround;
+      el.className = "w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm bg-white/10 text-stone-400 border-2 border-white/20 transition-all duration-300";
     }
   }
 
-  quantityInput.addEventListener("input", calculateQuote);
-  if (fabricSelect) fabricSelect.addEventListener("change", calculateQuote);
-  if (pyjamaCheckbox) pyjamaCheckbox.addEventListener("change", calculateQuote);
-  if (embroideryCheckbox) embroideryCheckbox.addEventListener("change", calculateQuote);
-
-  // Initial calculation
-  calculateQuote();
-
-  // "Take this quote to Order Form" button
-  if (quoteApplyBtn) {
-    quoteApplyBtn.addEventListener("click", () => {
-      const qty = quantityInput.value;
-      const fabricText = fabricSelect ? fabricSelect.options[fabricSelect.selectedIndex].text : "Standard";
-      const total = totalPriceDisplay.textContent;
-
-      // Populate main form
-      const orderTypeSelect = document.getElementById("order-type");
-      const orderQtyInput = document.getElementById("order-quantity");
-      const notesField = document.getElementById("order-notes");
-
-      if (orderTypeSelect) orderTypeSelect.value = "custom_panjabi";
-      if (orderQtyInput) orderQtyInput.value = qty;
-      if (notesField) {
-        notesField.value = `[এস্টিমেটর কোটেশন]: ফেব্রিক্স: ${fabricText}, আনুমানিক বাজেট: ${total}। কাস্টম মাপে সেলাই করতে চাই।`;
-      }
-
-      // Scroll to order form
-      const formSection = document.getElementById("order-section");
-      if (formSection) {
-        formSection.scrollIntoView({ behavior: "smooth" });
-      }
-
-      showToast("এস্টিমেটর তথ্য ফর্মটিতে যুক্ত করা হয়েছে!", "success");
+  // Step Navigation Listeners
+  if (btnGotoStep2) {
+    btnGotoStep2.addEventListener("click", () => {
+      showStep(2);
     });
+  }
+
+  if (btnBacktoStep1) {
+    btnBacktoStep1.addEventListener("click", () => {
+      showStep(1);
+    });
+  }
+
+  if (btnGotoStep3) {
+    btnGotoStep3.addEventListener("click", () => {
+      showStep(3);
+    });
+  }
+
+  if (btnBacktoStep2) {
+    btnBacktoStep2.addEventListener("click", () => {
+      showStep(2);
+    });
+  }
+
+  if (btnRecalculate) {
+    btnRecalculate.addEventListener("click", () => {
+      showStep(1);
+    });
+  }
+
+  // Step 3: Lead Capture Submission & Reveal
+  if (leadForm) {
+    leadForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const nameInput = document.getElementById("estimator-cust-name");
+      const phoneInput = document.getElementById("estimator-cust-phone");
+
+      const name = nameInput ? nameInput.value.trim() : "";
+      const rawPhone = phoneInput ? phoneInput.value.trim() : "";
+      const phone = normalizeBengaliDigits(rawPhone);
+      const rawDigits = phone.replace(/[^\d]/g, "");
+
+      if (!name) {
+        showToast("অনুগ্রহ করে আপনার নাম লিখুন।", "error");
+        nameInput?.focus();
+        return;
+      }
+
+      if (!phone || rawDigits.length < 10) {
+        showToast("সঠিক ১১ ডিজিটের ফোন / হোয়াটসঅ্যাপ নম্বর দিন।", "error");
+        phoneInput?.focus();
+        return;
+      }
+
+      // Calculate Custom Estimate
+      const fabricObj = fabricData[currentFabricKey] || fabricData.premium_cotton;
+      const styleObj = styleData[currentStyleKey] || styleData.plain;
+      const hasPyjama = pyjamaCheck ? pyjamaCheck.checked : true;
+
+      const basePrice = fabricObj.basePrice;
+      const stylePrice = styleObj.price;
+      const pyjamaCost = hasPyjama ? pyjamaPrice : 0;
+      const totalEstimated = basePrice + stylePrice + pyjamaCost;
+
+      // Populate Result Screen
+      const resName = document.getElementById("res-cust-name");
+      const resTotal = document.getElementById("res-total-price");
+      const resFabric = document.getElementById("res-fabric-name");
+      const resStyle = document.getElementById("res-style-name");
+      const resPyjama = document.getElementById("res-pyjama-status");
+      const resWhatsappBtn = document.getElementById("res-whatsapp-btn");
+      const resOrderFormBtn = document.getElementById("res-order-form-btn");
+
+      if (resName) resName.textContent = name;
+      if (resTotal) resTotal.textContent = `৳ ${totalEstimated.toLocaleString("en-IN")}`;
+      if (resFabric) resFabric.textContent = fabricObj.shortName;
+      if (resStyle) resStyle.textContent = styleObj.name;
+      if (resPyjama) resPyjama.textContent = hasPyjama ? "হ্যাঁ (+৳৪৫০)" : "না (শুধুমাত্র পাঞ্জাবী)";
+
+      // Setup Pre-filled WhatsApp Link for Instant Confirmation
+      const config = window.APP_CONFIG || {};
+      const waNumber = config.whatsappNumber || "8801728769213";
+      const waEstimateMsg = `আসসালামু আলাইকুম, আমি নূরানী পাঞ্জাবীর প্রাইস এস্টিমেটর থেকে আমার পাঞ্জাবীর বাজেট পেয়েছি:
+👤 নাম: ${name}
+📞 মোবাইল: ${phone}
+🧵 ফেব্রিক্স: ${fabricObj.name}
+✨ স্টাইল: ${styleObj.name}
+🌙 পাজামা: ${hasPyjama ? "হ্যাঁ (ম্যাচিং পাজামা সহ)" : "না (শুধুমাত্র পাঞ্জাবী)"}
+💰 আনুমানিক বাজেট: ৳ ${totalEstimated.toLocaleString("en-IN")}
+
+আমি এই মাপে পাঞ্জাবী তৈরি করার জন্য আলোচনা ও অর্ডার কনফার্ম করতে চাই।`;
+
+      if (resWhatsappBtn) {
+        resWhatsappBtn.href = `https://wa.me/${waNumber}?text=${encodeURIComponent(waEstimateMsg)}`;
+      }
+
+      // Sync with main order form down below
+      const mainName = document.getElementById("customer-name");
+      const mainPhone = document.getElementById("customer-phone");
+      const mainFabric = document.getElementById("order-fabric");
+      const mainNotes = document.getElementById("order-notes");
+      const mainOrderType = document.getElementById("order-type");
+
+      if (mainName) mainName.value = name;
+      if (mainPhone) mainPhone.value = phone.replace(/^(\+?88)?/, "");
+      if (mainOrderType) mainOrderType.value = currentFabricKey === "kabli_twill" ? "kabli_set" : "custom_panjabi";
+      if (mainFabric) {
+        for (let i = 0; i < mainFabric.options.length; i++) {
+          if (mainFabric.options[i].text.includes(fabricObj.shortName) || mainFabric.options[i].value.includes(fabricObj.shortName)) {
+            mainFabric.selectedIndex = i;
+            break;
+          }
+        }
+      }
+      if (mainNotes) {
+        mainNotes.value = `[এস্টিমেটর নির্বাচন]: ${fabricObj.shortName}, স্টাইল: ${styleObj.name}, পাজামা: ${hasPyjama ? "হ্যাঁ" : "না"}, বাজেট: ৳ ${totalEstimated}`;
+      }
+
+      if (resOrderFormBtn) {
+        resOrderFormBtn.addEventListener("click", () => {
+          const formSection = document.getElementById("order-section");
+          if (formSection) formSection.scrollIntoView({ behavior: "smooth" });
+        });
+      }
+
+      // Silently dispatch hot lead notification to Telegram Bot
+      sendEstimatorLeadNotification({
+        name,
+        phone,
+        fabric: fabricObj.name,
+        style: styleObj.name,
+        pyjama: hasPyjama ? "হ্যাঁ" : "না",
+        total: totalEstimated
+      });
+
+      // Smoothly reveal result step
+      showStep(4);
+      showToast("আপনার কাস্টম এস্টিমেট প্রস্তুত!", "success");
+    });
+  }
+}
+
+/**
+ * Send hot lead notification from Price Estimator to Telegram
+ */
+async function sendEstimatorLeadNotification(data) {
+  const config = window.APP_CONFIG || {};
+  const botToken = config.telegram?.botToken;
+  const chatId = config.telegram?.chatId;
+
+  if (!botToken || !chatId || botToken.includes("YOUR_") || chatId.includes("YOUR_")) {
+    return;
+  }
+
+  const cleanPhone = data.phone.replace(/[\s-]/g, "");
+  const cleanWaPhone = cleanPhone.replace(/^(\+?88)?0?/, "");
+  const now = new Date();
+  const formattedDate = now.toLocaleString("bn-BD", {
+    timeZone: "Asia/Dhaka",
+    dateStyle: "full",
+    timeStyle: "short"
+  });
+
+  const msg = `
+👑 <b>নূরানী পাঞ্জাবী টেইলার্স অ্যান্ড ফেব্রিক্স</b>
+━━━━━━━━━━━━━━━━━━━━━
+⚡ <b>প্রাইস এস্টিমেটর নতুন লিড (Hot Lead)</b> ⚡
+
+👤 <b>গ্রাহকের নাম:</b> ${escapeHtml(data.name)}
+📞 <b>মোবাইল নম্বর:</b> <code>${escapeHtml(data.phone)}</code>
+
+🧵 <b>নির্বাচিত ফেব্রিক্স:</b> ${escapeHtml(data.fabric)}
+✨ <b>সেলাই স্টাইল:</b> ${escapeHtml(data.style)}
+🌙 <b>পাজামা সেট:</b> ${data.pyjama}
+💰 <b>আনুমানিক বাজেট:</b> <b>৳ ${data.total.toLocaleString("en-IN")}</b>
+━━━━━━━━━━━━━━━━━━━━━
+⏰ <b>সময়:</b> ${formattedDate}
+
+⚡ <b>তাৎক্ষণিক অ্যাকশন:</b>
+👉 <a href="tel:${cleanPhone}">📞 সরাসরি কল দিন</a>
+👉 <a href="https://wa.me/88${cleanWaPhone}">💬 হোয়াটসঅ্যাপে মেসেজ দিন</a>
+  `.trim();
+
+  try {
+    await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: msg,
+        parse_mode: "HTML",
+        disable_web_page_preview: true
+      })
+    });
+  } catch (e) {
+    // Non-blocking background notification
+    console.warn("Estimator lead notification:", e);
   }
 }
 
