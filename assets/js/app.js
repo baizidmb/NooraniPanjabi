@@ -937,6 +937,7 @@ function initMobileMenu() {
   const mobileNav = document.getElementById("mobile-nav-drawer");
   const mobileBackdrop = document.getElementById("mobile-nav-backdrop");
   const mobileBottomBar = document.getElementById("mobile-bottom-bar");
+  const floatingWaBtn = document.getElementById("floating-whatsapp-btn");
   const navLinks = document.querySelectorAll(".mobile-nav-link");
 
   if (!menuBtn || !mobileNav) return;
@@ -956,6 +957,11 @@ function initMobileMenu() {
       mobileBottomBar.classList.add("translate-y-full", "opacity-0", "pointer-events-none");
     }
 
+    // Smoothly fade out floating WhatsApp button while menu is open
+    if (floatingWaBtn) {
+      floatingWaBtn.classList.add("opacity-0", "pointer-events-none", "translate-y-4");
+    }
+
     document.body.style.overflow = "hidden";
   }
 
@@ -972,6 +978,11 @@ function initMobileMenu() {
     // Smoothly slide sticky bottom bar back into view
     if (mobileBottomBar) {
       mobileBottomBar.classList.remove("translate-y-full", "opacity-0", "pointer-events-none");
+    }
+
+    // Smoothly restore floating WhatsApp button
+    if (floatingWaBtn) {
+      floatingWaBtn.classList.remove("opacity-0", "pointer-events-none", "translate-y-4");
     }
 
     document.body.style.overflow = "";
