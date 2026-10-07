@@ -890,81 +890,241 @@
 
   <!-- ================= MEASUREMENT GUIDE SECTION ================= -->
   <section id="measurements" class="py-20 bg-white border-y border-stone-200">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#99782b] bg-amber-50 px-3 py-1 rounded-full border border-amber-200">
+          মাপ দেওয়ার সহজ গাইড
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-[#064332] mt-3">
+          ঘরে বসেই দিন পাঞ্জাবীর নিখুঁত পরিমাপ
+        </h2>
+        <p class="text-stone-600 mt-2 text-sm sm:text-base leading-relaxed">
+          দোকানে না এসেও আপনি নিজের নিখুঁত মাপ দিতে পারেন। প্রতিটি অংশের চিত্র ও নিয়ম দেখে ফিতা দিয়ে খুব সহজেই মাপ নেওয়া সম্ভব।
+        </p>
+
+        <!-- Prominent 'Watch Measurement Video' Button -->
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button type="button" id="btn-watch-video" class="w-full sm:w-auto gold-gradient-btn px-8 py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer">
+            <div class="w-8 h-8 rounded-full bg-[#04261f] text-[#e8ca82] flex items-center justify-center shadow-inner shrink-0">
+              <i data-lucide="play" class="w-4 h-4 fill-current ml-0.5"></i>
+            </div>
+            <div class="text-left">
+              <span class="block text-sm sm:text-base font-extrabold tracking-wide">Watch Measurement Video</span>
+              <span class="block text-[11px] text-[#04261f]/80 font-semibold font-bengali">ভিডিও দেখে ২ মিনিটে মাপ নেওয়ার নিয়ম জানুন</span>
+            </div>
+          </button>
+
+          <a href="https://wa.me/8801728769213?text=আসসালামু%20আলাইকুম,%20আমি%20পাঞ্জাবীর%20মাপ%20দেওয়ার%20জন্য%20ভিডিও%20কল%20বা%20সহায়তা%20নিতে%20চাই।" target="_blank" class="dynamic-whatsapp-link w-full sm:w-auto px-6 py-4 rounded-2xl border-2 border-emerald-600/30 hover:border-emerald-600 bg-emerald-50/60 hover:bg-emerald-100/60 text-[#064332] font-bold text-sm flex items-center justify-center gap-2.5 transition-all">
+            <i data-lucide="video" class="w-5 h-5 text-emerald-700"></i>
+            <span>ভিডিও কলে মাস্টার টেইলারের লাইভ সহায়তা</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Measurement Steps Grid Layout (Clean Cards with Image Placeholders) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
         
-        <!-- Left: Explanation & Tabs -->
-        <div class="lg:col-span-7 space-y-6">
-          <span class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#99782b] bg-amber-50 px-3 py-1 rounded-full border border-amber-200">
-            মাপ দেওয়ার সহজ গাইড
-          </span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-[#064332]">
-            ঘরে বসেই দিন পাঞ্জাবীর নিখুঁত পরিমাপ
-          </h2>
-          <p class="text-stone-600 text-sm sm:text-base leading-relaxed">
-            দোকানে সরাসরি না এসেও আপনি ঘরে বসেই নিজের নিখুঁত মাপ দিতে পারেন। এছাড়া আপনার প্রিয় ফিটিং করা কোনো পাঞ্জাবী কুরিয়ার করে পাঠিয়েও হুবহু একই মাপে নতুন পাঞ্জাবী তৈরি করাতে পারেন।
-          </p>
-
-          <!-- Tab Buttons -->
-          <div class="flex flex-wrap gap-2 border-b border-stone-200 pb-3">
-            <button class="measure-tab-btn px-4 py-2 text-sm font-bold rounded-lg border-b-2 border-amber-500 text-amber-800 bg-amber-50" data-target="tab-length">
-              ১. ঝুল (Length)
-            </button>
-            <button class="measure-tab-btn px-4 py-2 text-sm font-bold rounded-lg border-b-2 border-transparent text-stone-600 hover:text-[#064332]" data-target="tab-chest">
-              ২. বুক / ছাতি (Chest)
-            </button>
-            <button class="measure-tab-btn px-4 py-2 text-sm font-bold rounded-lg border-b-2 border-transparent text-stone-600 hover:text-[#064332]" data-target="tab-shoulder">
-              ৩. তিরা / শোল্ডার (Shoulder)
-            </button>
-            <button class="measure-tab-btn px-4 py-2 text-sm font-bold rounded-lg border-b-2 border-transparent text-stone-600 hover:text-[#064332]" data-target="tab-sleeve">
-              ৪. হাতা (Sleeve)
-            </button>
-            <button class="measure-tab-btn px-4 py-2 text-sm font-bold rounded-lg border-b-2 border-transparent text-stone-600 hover:text-[#064332]" data-target="tab-collar">
-              ৫. কলার (Collar)
-            </button>
-          </div>
-
-          <!-- Tab Contents -->
-          <div class="bg-[#fbf9f5] p-6 rounded-2xl border border-stone-200 text-stone-700 text-sm leading-relaxed min-h-[140px]">
-            <div id="tab-length" class="measure-tab-content space-y-2">
-              <h4 class="font-bold text-base text-[#064332]">ঝুল বা লম্বার মাপ:</h4>
-              <p>কাঁধের উঁচু পয়েন্ট (কলার ও শোল্ডারের সংযোগস্থল) থেকে ফিতা সোজাভাবে নামিয়ে হাঁটুর নিচ বা আপনার পছন্দের উচ্চতা পর্যন্ত মাপ নিন। সাধারণত সেমি-লং পাঞ্জাবী ৪০-৪২ ইঞ্চি এবং ট্রাডিশনাল ঝুল ৪৪-৪৬ ইঞ্চি হয়ে থাকে।</p>
-            </div>
-            <div id="tab-chest" class="measure-tab-content hidden space-y-2">
-              <h4 class="font-bold text-base text-[#064332]">বুক বা ছাতির মাপ:</h4>
-              <p>বুকের সবচেয়ে চওড়া অংশে ফিতা ঘুরিয়ে মাপ নিন। পাঞ্জাবীর লুজ ফিটিং নিশ্চিত করতে মূল বডি মাপের সাথে সাধারণত ৪ থেকে ৫ ইঞ্চি লুজ যোগ করা হয়।</p>
-            </div>
-            <div id="tab-shoulder" class="measure-tab-content hidden space-y-2">
-              <h4 class="font-bold text-base text-[#064332]">তিরা বা শোল্ডারের মাপ:</h4>
-              <p>পিছনের এক কাঁধের হাড়ের কোণা থেকে কলারের পাশ দিয়ে অপর কাঁধের হাড়ের কোণা পর্যন্ত সোজা মাপ নিন।</p>
-            </div>
-            <div id="tab-sleeve" class="measure-tab-content hidden space-y-2">
-              <h4 class="font-bold text-base text-[#064332]">হাতার মাপ:</h4>
-              <p>কাঁধের শেষ প্রান্ত থেকে কব্জির হাড় পর্যন্ত বা যে পর্যন্ত কাফ বা হাতা পরতে চান সে পর্যন্ত মাপ নিন।</p>
-            </div>
-            <div id="tab-collar" class="measure-tab-content hidden space-y-2">
-              <h4 class="font-bold text-base text-[#064332]">কলার বা গলার মাপ:</h4>
-              <p>গলার চারপাশ দিয়ে ফিতা ঘুরিয়ে একটি আঙুল ভিতরে রেখে আরামদায়কভাবে মাপ নিন (সাধারণত ১৪.৫ থেকে ১৭ ইঞ্চি)।</p>
+        <!-- Step 1: Length / ঝুল -->
+        <div class="bg-[#fbf9f5] rounded-2xl border border-stone-200 p-5 flex flex-col justify-between hover:border-[#cfa853] hover:shadow-lg transition-all group">
+          <!-- Image Placeholder for Line-Art Diagram -->
+          <div class="mb-4 w-full h-44 rounded-xl bg-white border-2 border-dashed border-[#cfa853]/40 group-hover:border-[#cfa853] transition-colors flex flex-col items-center justify-center p-3 relative overflow-hidden text-center">
+            <!-- [INSERT LINE-ART DIAGRAM HERE: Length / ঝুল] -->
+            <!-- e.g. <img src="assets/images/measurements/length.svg" alt="ঝুল মাপের নিয়ম" class="w-full h-full object-contain"> -->
+            <div class="flex flex-col items-center text-stone-400 group-hover:text-[#99782b] transition-colors">
+              <div class="w-12 h-12 rounded-xl bg-amber-50 text-[#99782b] flex items-center justify-center mb-2 shadow-sm border border-amber-200/60">
+                <i data-lucide="ruler" class="w-6 h-6"></i>
+              </div>
+              <span class="text-xs font-bold text-stone-800">ঝুল / Length ডায়গ্রাম</span>
+              <span class="text-[10px] text-stone-400 mt-0.5 font-mono">[Line-Art Diagram Placeholder]</span>
             </div>
           </div>
 
-          <!-- Video Assistance Callout -->
-          <div class="flex items-center gap-3 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-sm">
-            <i data-lucide="video" class="w-6 h-6 text-emerald-700 shrink-0"></i>
-            <div>
-              <span class="font-bold">ভিডিও কলেও মাপ বুঝিয়ে দিতে পারবেন:</span>
-              <span class="text-xs block text-emerald-800">আমাদের হোয়াটসঅ্যাপে যোগাযোগ করলে আমাদের মাস্টার ট্রেইলার আপনাকে সরাসরি মাপ নিতে সাহায্য করবেন।</span>
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-6 h-6 rounded-full bg-[#064332] text-[#e8ca82] text-xs font-bold flex items-center justify-center shrink-0">১</span>
+              <h4 class="font-bold text-base text-[#064332]">ঝুল বা লম্বা (Length)</h4>
             </div>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              কাঁধের উঁচু পয়েন্ট (কলার ও শোল্ডারের সংযোগস্থল) থেকে ফিতা সোজাভাবে নামিয়ে হাঁটুর নিচ বা পছন্দের উচ্চতা পর্যন্ত মাপ নিন।
+            </p>
           </div>
 
+          <div class="mt-4 pt-3 border-t border-stone-200/70 flex items-center justify-between text-xs text-stone-500">
+            <span>স্ট্যান্ডার্ড: ৪০" - ৪৬"</span>
+            <span class="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded">স্টেপ ০১</span>
+          </div>
         </div>
 
-        <!-- Right: Visual Sizing Card -->
-        <div class="lg:col-span-5 bg-[#04261f] text-white p-8 rounded-3xl border-2 border-[#cfa853]/40 shadow-xl space-y-6">
-          <div class="flex items-center justify-between pb-4 border-b border-white/10">
-            <h3 class="font-bold text-lg text-[#e8ca82] font-serif-luxury">রেডিমেড স্ট্যান্ডার্ড সাইজ চার্ট</h3>
-            <span class="text-xs bg-white/10 px-2 py-0.5 rounded text-stone-300">ইঞ্চিতে (Inches)</span>
+        <!-- Step 2: Chest / ছাতি -->
+        <div class="bg-[#fbf9f5] rounded-2xl border border-stone-200 p-5 flex flex-col justify-between hover:border-[#cfa853] hover:shadow-lg transition-all group">
+          <!-- Image Placeholder for Line-Art Diagram -->
+          <div class="mb-4 w-full h-44 rounded-xl bg-white border-2 border-dashed border-[#cfa853]/40 group-hover:border-[#cfa853] transition-colors flex flex-col items-center justify-center p-3 relative overflow-hidden text-center">
+            <!-- [INSERT LINE-ART DIAGRAM HERE: Chest / ছাতি] -->
+            <!-- e.g. <img src="assets/images/measurements/chest.svg" alt="বুকের মাপের নিয়ম" class="w-full h-full object-contain"> -->
+            <div class="flex flex-col items-center text-stone-400 group-hover:text-[#99782b] transition-colors">
+              <div class="w-12 h-12 rounded-xl bg-amber-50 text-[#99782b] flex items-center justify-center mb-2 shadow-sm border border-amber-200/60">
+                <i data-lucide="maximize-2" class="w-6 h-6"></i>
+              </div>
+              <span class="text-xs font-bold text-stone-800">বুক / Chest ডায়গ্রাম</span>
+              <span class="text-[10px] text-stone-400 mt-0.5 font-mono">[Line-Art Diagram Placeholder]</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-6 h-6 rounded-full bg-[#064332] text-[#e8ca82] text-xs font-bold flex items-center justify-center shrink-0">২</span>
+              <h4 class="font-bold text-base text-[#064332]">বুক বা ছাতি (Chest)</h4>
+            </div>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              বুকের সবচেয়ে চওড়া অংশে ফিতা ঘুরিয়ে মাপ নিন। পাঞ্জাবীর স্বাভাবিক আরাম নিশ্চিত করতে বডির মূল মাপের সাথে ৪ থেকে ৫ ইঞ্চি লুজ যোগ করা হয়।
+            </p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-stone-200/70 flex items-center justify-between text-xs text-stone-500">
+            <span>লুজ সহ: ৪০" - ৪৬"</span>
+            <span class="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded">স্টেপ ০২</span>
+          </div>
+        </div>
+
+        <!-- Step 3: Sleeve / হাতা -->
+        <div class="bg-[#fbf9f5] rounded-2xl border border-stone-200 p-5 flex flex-col justify-between hover:border-[#cfa853] hover:shadow-lg transition-all group">
+          <!-- Image Placeholder for Line-Art Diagram -->
+          <div class="mb-4 w-full h-44 rounded-xl bg-white border-2 border-dashed border-[#cfa853]/40 group-hover:border-[#cfa853] transition-colors flex flex-col items-center justify-center p-3 relative overflow-hidden text-center">
+            <!-- [INSERT LINE-ART DIAGRAM HERE: Sleeve / হাতা] -->
+            <!-- e.g. <img src="assets/images/measurements/sleeve.svg" alt="হাতার মাপের নিয়ম" class="w-full h-full object-contain"> -->
+            <div class="flex flex-col items-center text-stone-400 group-hover:text-[#99782b] transition-colors">
+              <div class="w-12 h-12 rounded-xl bg-amber-50 text-[#99782b] flex items-center justify-center mb-2 shadow-sm border border-amber-200/60">
+                <i data-lucide="move-horizontal" class="w-6 h-6"></i>
+              </div>
+              <span class="text-xs font-bold text-stone-800">হাতা / Sleeve ডায়গ্রাম</span>
+              <span class="text-[10px] text-stone-400 mt-0.5 font-mono">[Line-Art Diagram Placeholder]</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-6 h-6 rounded-full bg-[#064332] text-[#e8ca82] text-xs font-bold flex items-center justify-center shrink-0">৩</span>
+              <h4 class="font-bold text-base text-[#064332]">হাতার মাপ (Sleeve)</h4>
+            </div>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              কাঁধের শেষ প্রান্তের হাড় থেকে হাত সামান্য বাঁকা রেখে কব্জির হাড় বা আপনার পছন্দের কাফ শেষ সীমানা পর্যন্ত মাপ নিন।
+            </p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-stone-200/70 flex items-center justify-between text-xs text-stone-500">
+            <span>স্ট্যান্ডার্ড: ২৩.৫" - ২৬"</span>
+            <span class="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded">স্টেপ ০৩</span>
+          </div>
+        </div>
+
+        <!-- Step 4: Shoulder / তিরা -->
+        <div class="bg-[#fbf9f5] rounded-2xl border border-stone-200 p-5 flex flex-col justify-between hover:border-[#cfa853] hover:shadow-lg transition-all group">
+          <!-- Image Placeholder for Line-Art Diagram -->
+          <div class="mb-4 w-full h-44 rounded-xl bg-white border-2 border-dashed border-[#cfa853]/40 group-hover:border-[#cfa853] transition-colors flex flex-col items-center justify-center p-3 relative overflow-hidden text-center">
+            <!-- [INSERT LINE-ART DIAGRAM HERE: Shoulder / তিরা] -->
+            <!-- e.g. <img src="assets/images/measurements/shoulder.svg" alt="তিরার মাপের নিয়ম" class="w-full h-full object-contain"> -->
+            <div class="flex flex-col items-center text-stone-400 group-hover:text-[#99782b] transition-colors">
+              <div class="w-12 h-12 rounded-xl bg-amber-50 text-[#99782b] flex items-center justify-center mb-2 shadow-sm border border-amber-200/60">
+                <i data-lucide="shield" class="w-6 h-6"></i>
+              </div>
+              <span class="text-xs font-bold text-stone-800">তিরা / Shoulder ডায়গ্রাম</span>
+              <span class="text-[10px] text-stone-400 mt-0.5 font-mono">[Line-Art Diagram Placeholder]</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-6 h-6 rounded-full bg-[#064332] text-[#e8ca82] text-xs font-bold flex items-center justify-center shrink-0">৪</span>
+              <h4 class="font-bold text-base text-[#064332]">তিরা বা শোল্ডার (Shoulder)</h4>
+            </div>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              পিছনের এক কাঁধের হাড়ের সংযোগস্থল থেকে কলারের পাশ দিয়ে অপর কাঁধের হাড়ের কোণা পর্যন্ত ফিতা সোজা রেখে মাপ নিন।
+            </p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-stone-200/70 flex items-center justify-between text-xs text-stone-500">
+            <span>স্ট্যান্ডার্ড: ১৭" - ২০"</span>
+            <span class="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded">স্টেপ ০৪</span>
+          </div>
+        </div>
+
+        <!-- Step 5: Collar / গলা -->
+        <div class="bg-[#fbf9f5] rounded-2xl border border-stone-200 p-5 flex flex-col justify-between hover:border-[#cfa853] hover:shadow-lg transition-all group">
+          <!-- Image Placeholder for Line-Art Diagram -->
+          <div class="mb-4 w-full h-44 rounded-xl bg-white border-2 border-dashed border-[#cfa853]/40 group-hover:border-[#cfa853] transition-colors flex flex-col items-center justify-center p-3 relative overflow-hidden text-center">
+            <!-- [INSERT LINE-ART DIAGRAM HERE: Collar / কলার] -->
+            <!-- e.g. <img src="assets/images/measurements/collar.svg" alt="কলারের মাপের নিয়ম" class="w-full h-full object-contain"> -->
+            <div class="flex flex-col items-center text-stone-400 group-hover:text-[#99782b] transition-colors">
+              <div class="w-12 h-12 rounded-xl bg-amber-50 text-[#99782b] flex items-center justify-center mb-2 shadow-sm border border-amber-200/60">
+                <i data-lucide="circle-dot" class="w-6 h-6"></i>
+              </div>
+              <span class="text-xs font-bold text-stone-800">কলার / Collar ডায়গ্রাম</span>
+              <span class="text-[10px] text-stone-400 mt-0.5 font-mono">[Line-Art Diagram Placeholder]</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-6 h-6 rounded-full bg-[#064332] text-[#e8ca82] text-xs font-bold flex items-center justify-center shrink-0">৫</span>
+              <h4 class="font-bold text-base text-[#064332]">কলার বা গলা (Collar)</h4>
+            </div>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              গলার গোড়া দিয়ে ফিতা ঘুরিয়ে ভেতরে একটি আঙুল রাখার জায়গা রেখে আরামদায়কভাবে মাপ নিন (সাধারণত ১৪.৫" থেকে ১৭")।
+            </p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-stone-200/70 flex items-center justify-between text-xs text-stone-500">
+            <span>স্ট্যান্ডার্ড: ১৪.৫" - ১৭"</span>
+            <span class="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded">স্টেপ ০৫</span>
+          </div>
+        </div>
+
+        <!-- Step 6: Waist / কোমর বা পেট -->
+        <div class="bg-[#fbf9f5] rounded-2xl border border-stone-200 p-5 flex flex-col justify-between hover:border-[#cfa853] hover:shadow-lg transition-all group">
+          <!-- Image Placeholder for Line-Art Diagram -->
+          <div class="mb-4 w-full h-44 rounded-xl bg-white border-2 border-dashed border-[#cfa853]/40 group-hover:border-[#cfa853] transition-colors flex flex-col items-center justify-center p-3 relative overflow-hidden text-center">
+            <!-- [INSERT LINE-ART DIAGRAM HERE: Waist / কোমর বা পেট] -->
+            <!-- e.g. <img src="assets/images/measurements/waist.svg" alt="কোমর বা পেটের মাপের নিয়ম" class="w-full h-full object-contain"> -->
+            <div class="flex flex-col items-center text-stone-400 group-hover:text-[#99782b] transition-colors">
+              <div class="w-12 h-12 rounded-xl bg-amber-50 text-[#99782b] flex items-center justify-center mb-2 shadow-sm border border-amber-200/60">
+                <i data-lucide="disc" class="w-6 h-6"></i>
+              </div>
+              <span class="text-xs font-bold text-stone-800">কোমর / Waist ডায়গ্রাম</span>
+              <span class="text-[10px] text-stone-400 mt-0.5 font-mono">[Line-Art Diagram Placeholder]</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-6 h-6 rounded-full bg-[#064332] text-[#e8ca82] text-xs font-bold flex items-center justify-center shrink-0">৬</span>
+              <h4 class="font-bold text-base text-[#064332]">কোমর বা পেট (Waist / Belly)</h4>
+            </div>
+            <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+              পেটের সবচেয়ে ভারী অংশে ফিতা আলতোভাবে ধরে মাপ নিন, যাতে নামাজে রুকু বা বসার সময় পাঞ্জাবী পেটে আটকে না যায়।
+            </p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-stone-200/70 flex items-center justify-between text-xs text-stone-500">
+            <span>লুজ সহ: ৩৮" - ৪৬"</span>
+            <span class="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded">স্টেপ ০৬</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Complementary Section: Size Chart & Easy Courier Option -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-8 border-t border-stone-200">
+        
+        <!-- Left: Ready-made Size Chart Card -->
+        <div class="lg:col-span-7 bg-[#04261f] text-white p-6 sm:p-8 rounded-3xl border-2 border-[#cfa853]/40 shadow-xl space-y-5">
+          <div class="flex items-center justify-between pb-3 border-b border-white/10">
+            <div>
+              <h3 class="font-bold text-lg text-[#e8ca82] font-serif-luxury">রেডিমেড স্ট্যান্ডার্ড সাইজ চার্ট</h3>
+              <p class="text-xs text-stone-300">যদি নিজে মাপ না দিতে চান, স্ট্যান্ডার্ড সাইজ বেছে নিতে পারেন</p>
+            </div>
+            <span class="text-xs bg-white/10 px-2.5 py-1 rounded-lg text-stone-300 font-mono">Inches</span>
           </div>
 
           <div class="overflow-x-auto">
@@ -972,10 +1132,10 @@
               <thead class="text-[#cfa853] uppercase border-b border-white/10">
                 <tr>
                   <th class="py-2">সাইজ</th>
-                  <th class="py-2">বুক</th>
-                  <th class="py-2">ঝুল</th>
-                  <th class="py-2">তিরা</th>
-                  <th class="py-2">হাতা</th>
+                  <th class="py-2">বুক (Chest)</th>
+                  <th class="py-2">ঝুল (Length)</th>
+                  <th class="py-2">তিরা (Shoulder)</th>
+                  <th class="py-2">হাতা (Sleeve)</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-white/5">
@@ -1011,13 +1171,27 @@
             </table>
           </div>
 
-          <div class="p-4 rounded-xl bg-white/5 border border-white/10 text-xs text-stone-300">
-            <strong class="text-[#e8ca82]">১০০% ফিটিং নিশ্চয়তা:</strong> আপনার নিজস্ব শরীরের পরিমাপ অনুযায়ী পারফেক্ট ড্র্যাপ ও ফিটিং নিশ্চিত করতে আমাদের অভিজ্ঞ মাস্টার কারিগররা প্রতিটি পাঞ্জাবী হাতে কাটিং করেন।
+          <div class="flex items-center justify-between text-xs text-stone-300 pt-3 border-t border-white/10">
+            <span class="text-[#e8ca82] font-semibold">✨ ১০০% নিখুঁত ফিটিং গ্যারান্টি</span>
+            <span>প্রয়োজনে ফ্রি অল্টারেশন সাপোর্ট</span>
+          </div>
+        </div>
+
+        <!-- Right: Courier Existing Panjabi & Direct Order -->
+        <div class="lg:col-span-5 space-y-5">
+          <div class="p-6 rounded-3xl bg-amber-50/70 border border-amber-200 space-y-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-200/80 text-[#99782b] flex items-center justify-center font-bold">
+              <i data-lucide="package" class="w-5 h-5"></i>
+            </div>
+            <h4 class="font-bold text-base text-[#064332]">পুরনো ফিটিং করা পাঞ্জাবী কুরিয়ার সুবিধা:</h4>
+            <p class="text-xs text-stone-700 leading-relaxed">
+              আপনার শরীরের সবচেয়ে নিখুঁত ফিটিংয়ের যেকোনো একটি প্রিয় পুরনো পাঞ্জাবী আমাদের ঠিকানায় কুরিয়ার করে পাঠাতে পারেন। আমাদের মাস্টার কারিগররা হুবহু একই মাপে আপনার নতুন পাঞ্জাবী তৈরি করে পুরনোটি সহ ফেরত পাঠিয়ে দেবেন।
+            </p>
           </div>
 
-          <a href="#order-section" class="w-full gold-gradient-btn py-3 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2">
-            <i data-lucide="edit" class="w-4 h-4"></i>
-            <span>আমার পরিমাপ দিয়ে অর্ডার পাঠাই</span>
+          <a href="#order-section" class="w-full gold-gradient-btn py-4 rounded-2xl font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-xl hover:shadow-2xl transition-all">
+            <i data-lucide="edit-3" class="w-5 h-5"></i>
+            <span>আমার পরিমাপ দিয়ে অর্ডার ফর্ম পূরণ করুন</span>
           </a>
         </div>
 
@@ -1784,6 +1958,96 @@
           বন্ধ করুন
         </button>
       </div>
+    </div>
+  </div>
+
+  <!-- ================= MEASUREMENT VIDEO TUTORIAL MODAL ================= -->
+  <div id="measurement-video-modal" class="modal-backdrop fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-[#04261f] border-2 border-[#cfa853] rounded-3xl max-w-2xl w-full p-6 sm:p-8 text-white space-y-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between pb-4 border-b border-white/10">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-[#e8ca82] border border-[#cfa853]/40 flex items-center justify-center">
+            <i data-lucide="play-circle" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h3 class="text-lg sm:text-xl font-bold text-white font-serif-luxury">পাঞ্জাবীর সঠিক মাপ নেওয়ার গাইড</h3>
+            <p class="text-xs text-stone-300">Watch Measurement Video & Instructions</p>
+          </div>
+        </div>
+        <button type="button" class="close-modal-btn text-stone-400 hover:text-white p-2 rounded-lg hover:bg-white/10 transition-colors">
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+      </div>
+
+      <!-- Video / Interactive Player Area -->
+      <div class="relative w-full aspect-video rounded-2xl bg-black/60 border border-[#cfa853]/40 overflow-hidden flex flex-col items-center justify-center group shadow-xl">
+        <!-- Background Mockup Image / Poster -->
+        <img 
+          src="assets/images/fabrics/egyptian-cotton.png" 
+          alt="Measurement Tutorial Poster" 
+          class="absolute inset-0 w-full h-full object-cover opacity-25 group-hover:scale-105 transition-transform duration-700"
+        >
+        <div class="absolute inset-0 bg-gradient-to-t from-[#04261f] via-black/40 to-transparent"></div>
+
+        <!-- Video Player Overlay Content -->
+        <div class="relative z-10 text-center px-4 space-y-3">
+          <a 
+            href="https://www.youtube.com/results?search_query=how+to+measure+panjabi" 
+            target="_blank" 
+            class="w-16 h-16 sm:w-20 sm:h-20 rounded-full gold-gradient-btn flex items-center justify-center mx-auto shadow-2xl hover:scale-110 active:scale-95 transition-all group-hover:ring-4 ring-[#cfa853]/50 cursor-pointer"
+            aria-label="Play Measurement Video"
+          >
+            <i data-lucide="play" class="w-8 h-8 text-[#04261f] fill-current ml-1"></i>
+          </a>
+          <div class="space-y-1">
+            <h4 class="font-bold text-base sm:text-lg text-white font-serif-luxury">ভিডিও টিউটোরিয়াল চালু করুন</h4>
+            <p class="text-xs text-[#e8ca82]">ফিতা দিয়ে পাঞ্জাবীর ৬টি অংশের মাপ নেওয়ার নিয়ম (২ মিনিট)</p>
+          </div>
+        </div>
+
+        <div class="absolute bottom-3 left-4 right-4 z-10 flex items-center justify-between text-[11px] text-stone-400 font-mono">
+          <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> HD Guide</span>
+          <span>নূরানী পাঞ্জাবী স্টুডিও</span>
+        </div>
+      </div>
+
+      <!-- Quick 4 Measurement Rules in Modal -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+        <div class="bg-white/5 border border-white/10 rounded-xl p-3 flex items-start gap-2.5">
+          <span class="text-[#e8ca82] font-bold text-sm shrink-0">১.</span>
+          <p class="text-stone-300"><strong class="text-white">সোজা হয়ে দাঁড়ান:</strong> পরিমাপ নেওয়ার সময় শরীর বাঁকা করবেন না, বুক স্বাভাবিকভাবে সোজা রাখুন।</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-3 flex items-start gap-2.5">
+          <span class="text-[#e8ca82] font-bold text-sm shrink-0">২.</span>
+          <p class="text-stone-300"><strong class="text-white">ফিতা ঢিলেঢালা রাখুন:</strong> গায়ের সাথে খুব চেপে ফিতা না ধরে সামান্য আঙুল রাখার জায়গা রাখুন।</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-3 flex items-start gap-2.5">
+          <span class="text-[#e8ca82] font-bold text-sm shrink-0">৩.</span>
+          <p class="text-stone-300"><strong class="text-white">পুরনো পাঞ্জাবীর মাপ:</strong> নিজে মাপ দিতে সমস্যা হলে নিজের প্রিয় ফিটিং পাঞ্জাবীর মাপও লিখে পাঠাতে পারেন।</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-3 flex items-start gap-2.5">
+          <span class="text-[#e8ca82] font-bold text-sm shrink-0">৪.</span>
+          <p class="text-stone-300"><strong class="text-white">লাইভ ভিডিও সাপোর্ট:</strong> মাপ নিতে সংশয় হলে সরাসরি মাস্টার টেইলারকে হোয়াটসঅ্যাপে ভিডিও কল দিন।</p>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="pt-2 flex flex-col sm:flex-row gap-3">
+        <a 
+          href="https://wa.me/8801728769213?text=আসসালামু%20আলাইকুম,%20পাঞ্জাবীর%20মাপ%20দেওয়ার%20জন্য%20আমাকে%20সহায়তা%20করুন।" 
+          target="_blank" 
+          class="dynamic-whatsapp-link flex-1 bg-emerald-600 hover:bg-emerald-500 text-white py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg transition-all"
+        >
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.888 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span>হোয়াটসঅ্যাপে ভিডিও কলে সহায়তা নিন</span>
+        </a>
+        <button type="button" class="close-modal-btn px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-stone-200 text-sm font-semibold transition-colors">
+          বন্ধ করুন
+        </button>
+      </div>
+
     </div>
   </div>
 

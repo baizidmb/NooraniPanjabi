@@ -847,6 +847,16 @@ function initModalHandlers() {
     });
   });
 
+  // Close on backdrop click
+  document.querySelectorAll(".modal-backdrop").forEach((modal) => {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+    });
+  });
+
   // Close on Escape
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
@@ -857,7 +867,18 @@ function initModalHandlers() {
     }
   });
 
-  // Measurement Guide Tab Switcher
+  // Watch Measurement Video Modal Open Trigger
+  const watchVideoBtn = document.getElementById("btn-watch-video");
+  const videoModal = document.getElementById("measurement-video-modal");
+  if (watchVideoBtn && videoModal) {
+    watchVideoBtn.addEventListener("click", () => {
+      videoModal.classList.remove("hidden");
+      videoModal.classList.add("flex");
+      if (window.lucide) window.lucide.createIcons();
+    });
+  }
+
+  // Measurement Guide Tab Switcher (if present)
   const tabs = document.querySelectorAll(".measure-tab-btn");
   const tabContents = document.querySelectorAll(".measure-tab-content");
 
