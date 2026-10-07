@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#fdfbf7"/>
+    </linearGradient>
+    <linearGradient id="goldGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#99782b"/>
+      <stop offset="50%" stop-color="#e8ca82"/>
+      <stop offset="100%" stop-color="#99782b"/>
+    </linearGradient>
+    <filter id="shadow2" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#064332" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Background Card -->
+  <rect width="320" height="200" rx="14" fill="url(#bgGrad2)"/>
+  <rect width="318" height="198" x="1" y="1" rx="13" fill="none" stroke="#cfa853" stroke-opacity="0.3" stroke-width="1.5"/>
+
+  <!-- Subtle Tailoring Grid Pattern -->
+  <g opacity="0.04" stroke="#064332" stroke-width="1">
+    <line x1="20" y1="0" x2="20" y2="200"/>
+    <line x1="60" y1="0" x2="60" y2="200"/>
+    <line x1="100" y1="0" x2="100" y2="200"/>
+    <line x1="140" y1="0" x2="140" y2="200"/>
+    <line x1="180" y1="0" x2="180" y2="200"/>
+    <line x1="220" y1="0" x2="220" y2="200"/>
+    <line x1="260" y1="0" x2="260" y2="200"/>
+    <line x1="300" y1="0" x2="300" y2="200"/>
+    <line x1="0" y1="40" x2="320" y2="40"/>
+    <line x1="0" y1="80" x2="320" y2="80"/>
+    <line x1="0" y1="120" x2="320" y2="120"/>
+    <line x1="0" y1="160" x2="320" y2="160"/>
+  </g>
+
+  <!-- Panjabi Silhouette / Mannequin Focus on Chest -->
+  <g transform="translate(100, 16)" filter="url(#shadow2)">
+    <!-- Neck -->
+    <path d="M42 12 C42 22 55 26 58 26 C61 26 74 22 74 12" fill="none" stroke="#064332" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+    
+    <!-- Mandarin Band Collar -->
+    <path d="M44 26 C48 30 68 30 72 26 L74 22 C68 25 48 25 44 22 Z" fill="#04261f" opacity="0.85"/>
+    
+    <!-- Panjabi Torso Upper Body -->
+    <path d="M44 26 L12 40 L26 100 L38 95 L36 60 L36 165 L80 165 L80 60 L78 95 L90 100 L104 40 L72 26 Z" 
+          fill="#f4ede1" stroke="#064332" stroke-width="1.8" stroke-linejoin="round"/>
+    
+    <!-- Front Placket (Button strip) -->
+    <line x1="58" y1="28" x2="58" y2="92" stroke="#064332" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="58" cy="40" r="1.5" fill="#cfa853"/>
+    <circle cx="58" cy="54" r="1.5" fill="#cfa853"/>
+    <circle cx="58" cy="68" r="1.5" fill="#cfa853"/>
+    <circle cx="58" cy="82" r="1.5" fill="#cfa853"/>
+  </g>
+
+  <!-- MEASUREMENT INDICATOR: Chest / বুক (Circumference Band) -->
+  <g transform="translate(100, 16)">
+    <!-- Back Dotted Wrap Line -->
+    <path d="M30 68 Q58 58 86 68" fill="none" stroke="#cfa853" stroke-width="2" stroke-dasharray="3,3" opacity="0.7"/>
+
+    <!-- Front Solid Measuring Tape Band -->
+    <path d="M26 70 Q58 82 90 70" fill="none" stroke="url(#goldGrad2)" stroke-width="5" stroke-linecap="round"/>
+    
+    <!-- Measuring Tape Ticks on Front -->
+    <path d="M26 70 Q58 82 90 70" fill="none" stroke="#04261f" stroke-width="1" stroke-dasharray="2,6"/>
+
+    <!-- End Arrows -->
+    <polygon points="22,70 30,64 30,76" fill="#99782b"/>
+    <polygon points="94,70 86,64 86,76" fill="#99782b"/>
+
+    <!-- Left & Right Measurement Crosshairs -->
+    <circle cx="36" cy="70" r="4.5" fill="#064332" stroke="#e8ca82" stroke-width="1.8"/>
+    <circle cx="80" cy="70" r="4.5" fill="#064332" stroke="#e8ca82" stroke-width="1.8"/>
+
+    <!-- Highlighted Measurement Area Pulse -->
+    <rect x="36" y="58" width="44" height="24" rx="4" fill="#cfa853" fill-opacity="0.15" stroke="#cfa853" stroke-width="1" stroke-dasharray="2,2"/>
+  </g>
+
+  <!-- Informative Callout Pill -->
+  <g transform="translate(202, 32)">
+    <rect width="106" height="46" rx="10" fill="#04261f" stroke="#cfa853" stroke-width="1.2" filter="url(#shadow2)"/>
+    <text x="12" y="18" font-family="sans-serif" font-size="10" font-weight="bold" fill="#e8ca82">বুক / CHEST</text>
+    <text x="12" y="34" font-family="sans-serif" font-size="12" font-weight="900" fill="#ffffff">৪০" - ৪৬"</text>
+  </g>
+
+  <!-- Step Instruction Badge -->
+  <g transform="translate(202, 90)">
+    <rect width="106" height="52" rx="8" fill="#f4ede1" stroke="#cfa853" stroke-width="0.8"/>
+    <text x="8" y="16" font-family="sans-serif" font-size="9" font-weight="bold" fill="#064332">লুজ কমফোর্ট:</text>
+    <text x="8" y="29" font-family="sans-serif" font-size="8.5" fill="#57534e">বডির মূল মাপের সাথে</text>
+    <text x="8" y="42" font-family="sans-serif" font-size="8.5" font-weight="bold" fill="#99782b">+৪" থেকে ৫" লুজ রাখুন</text>
+  </g>
+
+  <!-- Step Number Indicator Tag -->
+  <g transform="translate(14, 14)">
+    <circle cx="14" cy="14" r="13" fill="#064332"/>
+    <text x="14" y="18" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#e8ca82">২</text>
+  </g>
+</svg>
